@@ -1,0 +1,50 @@
+# Web Framework & UI
+streamlit>=1.30.0
+plotly>=5.18.0
+altair>=5.2.0
+
+# Data Science & ML
+pandas>=2.1.4
+numpy>=1.26.3
+scikit-learn>=1.4.0
+torch>=2.1.2
+transformers>=4.36.2
+
+# NLP & LLMs
+langchain>=0.1.0
+chromadb>=0.4.22
+sentence-transformers>=2.3.1
+
+# OLLAMA Integration
+requests>=2.31.0
+httpx>=0.26.0
+
+# Jupyter & Notebooks
+jupyter>=1.0.0
+jupyterlab>=4.0.10
+ipykernel>=6.28.0
+nbformat>=5.9.2
+
+# Data Visualization
+matplotlib>=3.8.2
+seaborn>=0.13.1
+
+# Database
+sqlalchemy>=2.0.25
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+tqdm>=4.66.1
+pillow>=10.2.0
+
+# Code Quality
+black>=23.12.1
+ruff>=0.1.11
+
+# API
+fastapi>=0.109.0
+uvicorn>=0.25.0
+
+# Diagram Generation
+diagrams>=0.23.4
