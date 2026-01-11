@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Models (too large for git)
+*.bin
+*.safetensors
+*.gguf
+models/*.pt
+models/*.pth
+
+# Large datasets
+data/large/
+*.csv.gz
+*.parquet
+*.h5
+
+# Docker
+.env
+
+# Streamlit
+.streamlit/secrets.toml
+
+# ChromaDB
+chroma_db/
+*.chroma
+
+# OLLAMA models cache
+.ollama/
