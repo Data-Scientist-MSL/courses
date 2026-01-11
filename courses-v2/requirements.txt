@@ -1,0 +1,57 @@
+# Core Framework
+streamlit==1.31.0
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+
+# AI/ML Libraries
+langchain==0.1.5
+langchain-community==0.0.17
+chromadb==0.4.22
+transformers==4.37.0
+torch==2.1.2
+sentence-transformers==2.3.1
+accelerate==0.26.1
+peft==0.8.2
+bitsandbytes==0.42.0
+
+# Data Processing
+pandas==2.2.0
+numpy==1.26.3
+scikit-learn==1.4.0
+plotly==5.18.0
+matplotlib==3.8.2
+seaborn==0.13.1
+
+# Database & Caching
+redis==5.0.1
+sqlalchemy==2.0.25
+
+# Notebook Support
+jupyterlab==4.0.11
+notebook==7.0.7
+ipywidgets==8.1.1
+
+# Data Profiling
+ydata-profiling==4.6.4
+
+# Utilities
+requests==2.31.0
+python-dotenv==1.0.0
+pyyaml==6.0.1
+python-multipart==0.0.6
+aiofiles==23.2.1
+
+# Code Quality
+black==24.1.1
+pylint==3.0.3
+mypy==1.8.0
+
+# Mermaid/Diagram Support
+mermaid-py==0.3.1
+
+# HTTP Client for OLLAMA
+httpx==0.26.0
+
+# Additional ML Tools
+datasets==2.16.1
+evaluate==0.4.1

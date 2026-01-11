@@ -1,0 +1,47 @@
+graph TD
+    Start([Start: Define Task Goal]) --> analyze{Analyze Task<br/>Complexity}
+    
+    analyze -->|Simple/Clear| zero[Zero-Shot Prompting<br/>'Translate to French: ...']
+    analyze -->|Needs Examples| few[Few-Shot Prompting<br/>Show 2-5 examples]
+    analyze -->|Complex Reasoning| cot[Chain-of-Thought<br/>'Let's think step by step']
+    
+    zero --> test1{Test Output<br/>Quality}
+    few --> test1
+    cot --> test1
+    
+    test1 -->|Good| finalize[Finalize Prompt Template]
+    test1 -->|Poor| refine{Refine Strategy}
+    
+    refine -->|Add Examples| few
+    refine -->|Add Reasoning| cot
+    refine -->|Change Wording| rewrite[Rewrite Instructions<br/>More Specific]
+    
+    rewrite --> test1
+    
+    finalize --> format[Add Output Formatting<br/>JSON/Bullets/etc]
+    format --> constraints[Add Constraints<br/>Length/Tone/Style]
+    constraints --> validate[Validate on Test Set]
+    
+    validate --> eval{Meets<br/>Requirements?}
+    eval -->|Yes| deploy[Deploy to Production]
+    eval -->|No| debug{Debug Issue}
+    
+    debug -->|Inconsistent| temp[Adjust Temperature<br/>Lower = More Deterministic]
+    debug -->|Wrong Format| format
+    debug -->|Hallucinations| rag[Add RAG System<br/>Ground with Facts]
+    debug -->|Off-Topic| constraints
+    
+    temp --> validate
+    rag --> validate
+    
+    deploy --> monitor[Monitor Performance]
+    monitor --> feedback{User Feedback}
+    feedback -->|Issues Found| refine
+    feedback -->|All Good| End([Maintain & Update])
+    
+    style Start fill:#e1f5ff
+    style zero fill:#fff3cd
+    style few fill:#ffe1f5
+    style cot fill:#ffd4e5
+    style deploy fill:#d4edda
+    style End fill:#d4edda

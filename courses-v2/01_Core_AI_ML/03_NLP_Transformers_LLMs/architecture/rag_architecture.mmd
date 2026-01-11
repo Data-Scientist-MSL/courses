@@ -1,0 +1,39 @@
+graph LR
+    subgraph UserQuery["1. User Query"]
+        user[User Question:<br/>'What is RAG?']
+    end
+    
+    subgraph Retrieval["2. Retrieval Phase"]
+        user --> embed1[Query Embedding<br/>Model]
+        embed1 --> query_vec[Query Vector<br/>768-dim]
+        
+        docs[(Document Store<br/>PDFs, Text, Web)]
+        docs --> chunks[Split into Chunks]
+        chunks --> embed2[Chunk Embeddings<br/>Same Model]
+        embed2 --> vectordb[(Vector Database<br/>Chroma/Pinecone)]
+        
+        query_vec --> similarity[Similarity Search<br/>Cosine/Euclidean]
+        vectordb --> similarity
+        similarity --> topk[Top-K Results<br/>K=3-5]
+    end
+    
+    subgraph Augmentation["3. Augmentation Phase"]
+        topk --> context[Retrieved Context]
+        user --> prompt_template[Prompt Template]
+        context --> prompt_template
+        prompt_template --> augmented[Augmented Prompt:<br/>'Given context: ...<br/>Answer: ...']
+    end
+    
+    subgraph Generation["4. Generation Phase"]
+        augmented --> llm[LLM<br/>GPT/Llama/Mistral]
+        llm --> answer[Generated Answer<br/>with Source Attribution]
+    end
+    
+    answer --> userout[User receives<br/>Grounded Response]
+    
+    style embed1 fill:#e1f5ff
+    style embed2 fill:#e1f5ff
+    style vectordb fill:#ffe1f5
+    style similarity fill:#fff3cd
+    style llm fill:#d4edda
+    style answer fill:#d4edda

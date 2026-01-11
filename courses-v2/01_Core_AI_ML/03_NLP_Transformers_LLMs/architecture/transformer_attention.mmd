@@ -1,0 +1,44 @@
+graph TB
+    subgraph Input["Input Processing"]
+        tokens[Token Embeddings]
+        pos[Positional Encodings]
+        tokens --> add1[Add]
+        pos --> add1
+    end
+    
+    subgraph MultiHeadAttention["Multi-Head Attention Mechanism"]
+        add1 --> split[Split into H heads]
+        split --> Q[Query Projection<br/>W_Q]
+        split --> K[Key Projection<br/>W_K]
+        split --> V[Value Projection<br/>W_V]
+        
+        Q --> attention[Scaled Dot-Product<br/>Attention]
+        K --> attention
+        V --> attention
+        
+        attention --> concat[Concatenate Heads]
+        concat --> linear[Linear Projection<br/>W_O]
+    end
+    
+    subgraph AttentionDetail["Attention Computation"]
+        attention --> matmul1["Q × K^T"]
+        matmul1 --> scale["÷ √d_k"]
+        scale --> softmax[Softmax]
+        softmax --> matmul2["× V"]
+        matmul2 --> output[Output]
+    end
+    
+    linear --> addnorm1[Add & Normalize]
+    add1 --> addnorm1
+    
+    addnorm1 --> ffn[Feed-Forward Network<br/>ReLU]
+    ffn --> addnorm2[Add & Normalize]
+    addnorm1 --> addnorm2
+    
+    addnorm2 --> nextlayer[Next Transformer Layer<br/>or Output]
+    
+    style tokens fill:#e1f5ff
+    style pos fill:#e1f5ff
+    style attention fill:#ffe1f5
+    style softmax fill:#fff3cd
+    style output fill:#d4edda
