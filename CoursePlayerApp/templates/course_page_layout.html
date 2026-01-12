@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }} - CoursePlayerApp</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="{{ course.description }}">
+    
+    <!-- Accessibility -->
+    <meta name="theme-color" content="#0066CC">
+    
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/course-player.css">
+</head>
+<body>
+    <!-- Skip to main content (accessibility) -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header role="banner" class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="/static/img/logo.svg" alt="CoursePlayerApp">
+                </a>
+                
+                <nav aria-label="Main navigation">
+                    <ul class="nav-menu">
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/progress">My Progress</a></li>
+                        <li><a href="/achievements">Achievements</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="user-menu">
+                    <button aria-label="User menu" aria-expanded="false">
+                        <img src="{{ user.avatar_url }}" alt="">
+                        <span>{{ user.name }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="course-player-layout">
+            <!-- Sidebar: Course Outline -->
+            <aside class="course-sidebar" role="complementary" aria-label="Course outline">
+                <div class="sidebar-header">
+                    <h2>{{ course.title }}</h2>
+                    <div class="progress-indicator" role="progressbar" 
+                         aria-valuenow="{{ progress.percentage }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        <div class="progress-bar" style="width: {{ progress.percentage }}%"></div>
+                        <span>{{ progress.percentage }}% Complete</span>
+                    </div>
+                </div>
+                
+                <nav aria-label="Course modules">
+                    {% for module in course.modules %}
+                    <div class="module">
+                        <h3>
+                            <button aria-expanded="true" aria-controls="module-{{ module.id }}">
+                                {{ module.title }}
+                            </button>
+                        </h3>
+                        
+                        <ul id="module-{{ module.id }}" class="lesson-list">
+                            {% for lesson in module.lessons %}
+                            <li class="{% if lesson.completed %}completed{% endif %} {% if lesson.id == current_lesson.id %}active{% endif %}">
+                                <a href="/courses/{{ course.id }}/lessons/{{ lesson.id }}">
+                                    {% if lesson.completed %}
+                                    <span aria-label="Completed">✓</span>
+                                    {% endif %}
+                                    {{ lesson.title }}
+                                    <span class="duration">{{ lesson.duration }}</span>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </nav>
+            </aside>
+            
+            <!-- Main: Lesson Content -->
+            <section class="lesson-content">
+                <div class="lesson-header">
+                    <h1>{{ current_lesson.title }}</h1>
+                    <div class="lesson-meta">
+                        <span class="duration">{{ current_lesson.duration }}</span>
+                        <span class="difficulty">{{ current_lesson.difficulty }}</span>
+                    </div>
+                </div>
+                
+                <!-- Video Player -->
+                <div class="video-player-container">
+                    {% include 'video_player_layout.html' %}
+                </div>
+                
+                <!-- Slides -->
+                <div class="slides-container">
+                    <h2>Slides</h2>
+                    <!-- PDF viewer would go here -->
+                </div>
+                
+                <!-- Lesson Actions -->
+                <div class="lesson-actions">
+                    {% if not current_lesson.completed %}
+                    <button class="btn-primary" onclick="markComplete()">
+                        Mark as Complete
+                    </button>
+                    {% else %}
+                    <button class="btn-secondary" disabled>
+                        <span aria-label="Completed">✓</span> Completed
+                    </button>
+                    {% endif %}
+                    
+                    {% if next_lesson %}
+                    <a href="/courses/{{ course.id }}/lessons/{{ next_lesson.id }}" class="btn-primary">
+                        Next Lesson →
+                    </a>
+                    {% endif %}
+                </div>
+            </section>
+            
+            <!-- Sidebar: AI Tutor -->
+            {% if user.tier in ['intermediate', 'advanced'] %}
+            <aside class="ai-tutor-sidebar" role="complementary" aria-label="AI Tutor">
+                <div class="ai-tutor-header">
+                    <h2>🤖 AI Tutor</h2>
+                    {% if user.tier == 'intermediate' %}
+                    <span class="quota">{{ ai_quota.remaining }}/{{ ai_quota.limit }} questions</span>
+                    {% else %}
+                    <span class="quota">✨ Unlimited</span>
+                    {% endif %}
+                </div>
+                
+                <div class="ai-tutor-messages" role="log" aria-live="polite">
+                    <!-- Messages would be loaded here -->
+                </div>
+                
+                <div class="ai-tutor-input">
+                    <label for="ai-question" class="sr-only">Ask a question</label>
+                    <input type="text" 
+                           id="ai-question" 
+                           placeholder="Ask a question..."
+                           aria-describedby="ai-hint">
+                    <button aria-label="Send question">Send</button>
+                    <span id="ai-hint" class="hint sr-only">
+                        Press Enter to send your question
+                    </span>
+                </div>
+            </aside>
+            {% else %}
+            <aside class="ai-tutor-sidebar locked" role="complementary">
+                <div class="locked-feature">
+                    <div class="lock-icon" aria-hidden="true">🔒</div>
+                    <h2>AI Tutor</h2>
+                    <p>Get instant answers to your questions!</p>
+                    <ul>
+                        <li>Context-aware assistance</li>
+                        <li>Code debugging help</li>
+                        <li>Concept clarification</li>
+                    </ul>
+                    <a href="/pricing" class="btn-upgrade">Unlock with Intermediate →</a>
+                </div>
+            </aside>
+            {% endif %}
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer role="contentinfo" class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 CoursePlayerApp. All rights reserved.</p>
+            <nav aria-label="Footer navigation">
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/privacy">Privacy</a></li>
+                    <li><a href="/terms">Terms</a></li>
+                    <li><a href="/accessibility">Accessibility</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/course-player.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+{
+  "feature_flags": {
+    "description": "Feature availability by subscription tier",
+    "last_updated": "2024-01-20"
+  },
+  
+  "tiers": {
+    "basic": {
+      "price_annual": 97,
+      "courses_available": 5,
+      "features": {
+        "video_streaming": true,
+        "video_max_quality": "720p",
+        "video_download": false,
+        "slide_viewing": true,
+        "slide_download_pdf": false,
+        "slide_download_pptx": false,
+        "lab_view_only": true,
+        "lab_interactive": false,
+        "lab_custom_scenarios": false,
+        "ai_tutor_enabled": false,
+        "ai_tutor_quota_monthly": 0,
+        "code_download": false,
+        "dataset_download": false,
+        "certificate_digital": false,
+        "certificate_blockchain": false,
+        "community_forums": false,
+        "priority_support": false
+      }
+    },
+    
+    "intermediate": {
+      "price_annual": 247,
+      "courses_available": 8,
+      "features": {
+        "video_streaming": true,
+        "video_max_quality": "1080p",
+        "video_download": true,
+        "video_download_quota_gb_monthly": 50,
+        "slide_viewing": true,
+        "slide_download_pdf": true,
+        "slide_download_pptx": false,
+        "lab_view_only": false,
+        "lab_interactive": true,
+        "lab_hours_quota_monthly": 100,
+        "lab_custom_scenarios": false,
+        "ai_tutor_enabled": true,
+        "ai_tutor_quota_monthly": 50,
+        "ai_tutor_model": "llama2:7b",
+        "code_download": true,
+        "code_download_quota_gb_monthly": 5,
+        "dataset_download": true,
+        "certificate_digital": true,
+        "certificate_blockchain": false,
+        "community_forums": true,
+        "priority_support": false
+      }
+    },
+    
+    "advanced": {
+      "price_annual": 497,
+      "courses_available": 9,
+      "features": {
+        "video_streaming": true,
+        "video_max_quality": "4k",
+        "video_download": true,
+        "video_download_quota_gb_monthly": -1,
+        "slide_viewing": true,
+        "slide_download_pdf": true,
+        "slide_download_pptx": true,
+        "lab_view_only": false,
+        "lab_interactive": true,
+        "lab_hours_quota_monthly": -1,
+        "lab_custom_scenarios": true,
+        "lab_gpu_access": true,
+        "ai_tutor_enabled": true,
+        "ai_tutor_quota_monthly": -1,
+        "ai_tutor_model": "llama2:7b,codellama:7b",
+        "code_download": true,
+        "code_download_quota_gb_monthly": -1,
+        "dataset_download": true,
+        "certificate_digital": true,
+        "certificate_blockchain": true,
+        "community_forums": true,
+        "mentor_matching": true,
+        "priority_support": true,
+        "priority_support_sla_hours": 4
+      }
+    }
+  },
+  
+  "course_tier_requirements": {
+    "01_DataScientistToolbox": "basic",
+    "02_RProgramming": "basic",
+    "03_GettingData": "basic",
+    "04_ExploratoryAnalysis": "basic",
+    "05_ReproducibleResearch": "basic",
+    "06_StatisticalInference": "intermediate",
+    "07_RegressionModels": "intermediate",
+    "08_PracticalMachineLearning": "intermediate",
+    "09_DevelopingDataProducts": "advanced"
+  },
+  
+  "notes": {
+    "quota_unlimited": "A value of -1 indicates unlimited quota",
+    "quota_reset": "All monthly quotas reset on the 1st day of each month",
+    "tier_hierarchy": "advanced > intermediate > basic"
+  }
+}

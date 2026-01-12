@@ -1,0 +1,311 @@
+# Achievement Definitions
+# Gamification system for CoursePlayerApp
+
+achievements:
+  # Course completion achievements
+  - id: first_lesson
+    name: "First Steps"
+    description: "Completed your first lesson"
+    icon: "🎯"
+    icon_url: "/badges/first_lesson.svg"
+    category: course
+    points: 50
+    rarity: common
+    criteria:
+      type: lesson_count
+      min_value: 1
+    
+  - id: first_course
+    name: "Course Completion"
+    description: "Completed your first course"
+    icon: "🎓"
+    icon_url: "/badges/first_course.svg"
+    category: course
+    points: 500
+    rarity: rare
+    criteria:
+      type: course_count
+      min_value: 1
+  
+  - id: all_courses_basic
+    name: "Basic Graduate"
+    description: "Completed all Basic tier courses"
+    icon: "📚"
+    icon_url: "/badges/basic_graduate.svg"
+    category: course
+    points: 1000
+    rarity: rare
+    criteria:
+      type: tier_courses_complete
+      tier: basic
+  
+  - id: all_courses_intermediate
+    name: "Intermediate Master"
+    description: "Completed all Intermediate tier courses"
+    icon: "🏆"
+    icon_url: "/badges/intermediate_master.svg"
+    category: course
+    points: 2500
+    rarity: epic
+    criteria:
+      type: tier_courses_complete
+      tier: intermediate
+  
+  - id: all_courses
+    name: "Master Graduate"
+    description: "Completed all available courses"
+    icon: "👑"
+    icon_url: "/badges/master_graduate.svg"
+    category: course
+    points: 5000
+    rarity: legendary
+    criteria:
+      type: all_courses_complete
+  
+  # Learning streak achievements
+  - id: streak_3
+    name: "Getting Started"
+    description: "3-day learning streak"
+    icon: "🔥"
+    icon_url: "/badges/streak_3.svg"
+    category: streak
+    points: 100
+    rarity: common
+    criteria:
+      type: streak_days
+      min_value: 3
+  
+  - id: week_streak
+    name: "Consistent Learner"
+    description: "7-day learning streak"
+    icon: "🔥🔥"
+    icon_url: "/badges/week_streak.svg"
+    category: streak
+    points: 200
+    rarity: rare
+    criteria:
+      type: streak_days
+      min_value: 7
+  
+  - id: month_streak
+    name: "Dedicated Student"
+    description: "30-day learning streak"
+    icon: "🔥🔥🔥"
+    icon_url: "/badges/month_streak.svg"
+    category: streak
+    points: 1000
+    rarity: epic
+    criteria:
+      type: streak_days
+      min_value: 30
+  
+  - id: year_streak
+    name: "Lifelong Learner"
+    description: "365-day learning streak"
+    icon: "🔥👑"
+    icon_url: "/badges/year_streak.svg"
+    category: streak
+    points: 10000
+    rarity: legendary
+    criteria:
+      type: streak_days
+      min_value: 365
+  
+  # Mastery achievements
+  - id: perfect_quiz
+    name: "Perfect Score"
+    description: "Scored 100% on a quiz"
+    icon: "⭐"
+    icon_url: "/badges/perfect.svg"
+    category: mastery
+    points: 150
+    rarity: rare
+    criteria:
+      type: quiz_score
+      min_value: 100
+  
+  - id: quiz_master
+    name: "Quiz Master"
+    description: "Scored 100% on 10 quizzes"
+    icon: "⭐⭐⭐"
+    icon_url: "/badges/quiz_master.svg"
+    category: mastery
+    points: 1000
+    rarity: epic
+    criteria:
+      type: perfect_quiz_count
+      min_value: 10
+  
+  - id: lab_master
+    name: "Lab Expert"
+    description: "Completed 10 labs with score > 90%"
+    icon: "🧪"
+    icon_url: "/badges/lab_master.svg"
+    category: mastery
+    points: 400
+    rarity: epic
+    criteria:
+      type: lab_high_scores
+      count: 10
+      min_score: 90
+  
+  - id: perfect_course
+    name: "Perfectionist"
+    description: "Completed a course with 100% average"
+    icon: "💯"
+    icon_url: "/badges/perfectionist.svg"
+    category: mastery
+    points: 800
+    rarity: epic
+    criteria:
+      type: course_perfect_score
+      min_value: 100
+  
+  # Speed achievements
+  - id: speed_learner
+    name: "Speed Learner"
+    description: "Completed a course in under 2 weeks"
+    icon: "⚡"
+    icon_url: "/badges/speed.svg"
+    category: speed
+    points: 300
+    rarity: rare
+    criteria:
+      type: course_completion_days
+      max_value: 14
+  
+  - id: power_learner
+    name: "Power Learner"
+    description: "Completed a course in under 1 week"
+    icon: "⚡⚡"
+    icon_url: "/badges/power_learner.svg"
+    category: speed
+    points: 600
+    rarity: epic
+    criteria:
+      type: course_completion_days
+      max_value: 7
+  
+  # Community achievements
+  - id: helpful_community
+    name: "Community Helper"
+    description: "Answered 20 forum questions"
+    icon: "🤝"
+    icon_url: "/badges/helper.svg"
+    category: community
+    points: 250
+    rarity: rare
+    criteria:
+      type: forum_answers
+      min_value: 20
+  
+  - id: mentor
+    name: "Mentor"
+    description: "Helped 10 students with code reviews"
+    icon: "👨‍🏫"
+    icon_url: "/badges/mentor.svg"
+    category: community
+    points: 500
+    rarity: epic
+    criteria:
+      type: code_reviews_given
+      min_value: 10
+  
+  # Time-based achievements
+  - id: early_bird
+    name: "Early Bird"
+    description: "Studied before 7 AM"
+    icon: "🌅"
+    icon_url: "/badges/early_bird.svg"
+    category: streak
+    points: 100
+    rarity: common
+    criteria:
+      type: study_time
+      before_hour: 7
+  
+  - id: night_owl
+    name: "Night Owl"
+    description: "Studied after 10 PM"
+    icon: "🦉"
+    icon_url: "/badges/night_owl.svg"
+    category: streak
+    points: 100
+    rarity: common
+    criteria:
+      type: study_time
+      after_hour: 22
+  
+  - id: weekend_warrior
+    name: "Weekend Warrior"
+    description: "Completed 5 weekend study sessions"
+    icon: "💪"
+    icon_url: "/badges/weekend_warrior.svg"
+    category: streak
+    points: 200
+    rarity: rare
+    criteria:
+      type: weekend_sessions
+      min_value: 5
+
+# Achievement categories
+categories:
+  - id: course
+    name: "Course Achievements"
+    description: "Complete courses and lessons"
+    icon: "📚"
+  
+  - id: streak
+    name: "Learning Streaks"
+    description: "Maintain consistent study habits"
+    icon: "🔥"
+  
+  - id: mastery
+    name: "Mastery Achievements"
+    description: "Excel in quizzes and labs"
+    icon: "⭐"
+  
+  - id: speed
+    name: "Speed Achievements"
+    description: "Learn efficiently"
+    icon: "⚡"
+  
+  - id: community
+    name: "Community Achievements"
+    description: "Help others learn"
+    icon: "🤝"
+
+# Rarity levels
+rarity:
+  common:
+    color: "#9E9E9E"
+    multiplier: 1.0
+  rare:
+    color: "#2196F3"
+    multiplier: 1.5
+  epic:
+    color: "#9C27B0"
+    multiplier: 2.0
+  legendary:
+    color: "#FF9800"
+    multiplier: 3.0
+
+# Notification configuration
+notifications:
+  # Show achievement popup
+  show_popup: true
+  popup_duration_seconds: 5
+  
+  # Send email notification
+  send_email: true
+  email_template: "achievement_unlocked"
+  
+  # Show in notification center
+  add_to_notifications: true
+  
+  # Share options
+  enable_social_share: true
+  social_platforms:
+    - linkedin
+    - twitter
+    - facebook

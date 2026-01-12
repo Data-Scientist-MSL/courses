@@ -1,0 +1,230 @@
+<!-- Video Player Component -->
+<div class="video-player" data-lesson-id="{{ lesson.id }}">
+    <!-- Video Container -->
+    <div class="video-container">
+        <video id="lesson-video" 
+               controls 
+               preload="metadata"
+               aria-label="{{ lesson.title }} video">
+            <source src="{{ video_url }}" type="application/x-mpegURL">
+            
+            <!-- Captions -->
+            {% if captions_url %}
+            <track kind="captions" 
+                   src="{{ captions_url }}" 
+                   srclang="en" 
+                   label="English"
+                   default>
+            {% endif %}
+            
+            <!-- Fallback -->
+            <p>Your browser doesn't support HTML5 video. 
+               <a href="{{ video_url }}">Download the video</a> instead.</p>
+        </video>
+        
+        <!-- Overlay: Loading -->
+        <div class="video-loading" role="status" aria-live="polite" hidden>
+            <div class="spinner" aria-hidden="true"></div>
+            <span>Loading video...</span>
+        </div>
+        
+        <!-- Overlay: Error -->
+        <div class="video-error" role="alert" hidden>
+            <p>Failed to load video. Please try again.</p>
+            <button onclick="retryVideo()">Retry</button>
+        </div>
+    </div>
+    
+    <!-- Custom Controls -->
+    <div class="video-controls">
+        <div class="controls-row">
+            <!-- Playback controls -->
+            <button class="btn-icon" 
+                    aria-label="Play/Pause" 
+                    data-action="playpause">
+                <svg class="icon-play" aria-hidden="true">
+                    <use href="#icon-play"></use>
+                </svg>
+                <svg class="icon-pause" aria-hidden="true" hidden>
+                    <use href="#icon-pause"></use>
+                </svg>
+            </button>
+            
+            <!-- Progress bar -->
+            <div class="progress-container">
+                <input type="range" 
+                       class="progress-bar"
+                       min="0" 
+                       max="100" 
+                       value="0"
+                       aria-label="Video progress"
+                       aria-valuetext="0% watched">
+                <div class="progress-preview" hidden>
+                    <img src="" alt="Preview">
+                    <span class="preview-time"></span>
+                </div>
+            </div>
+            
+            <!-- Time display -->
+            <div class="time-display">
+                <span class="current-time">0:00</span>
+                <span>/</span>
+                <span class="duration">0:00</span>
+            </div>
+            
+            <!-- Volume -->
+            <button class="btn-icon" 
+                    aria-label="Mute/Unmute" 
+                    data-action="mute">
+                <svg class="icon-volume" aria-hidden="true">
+                    <use href="#icon-volume"></use>
+                </svg>
+            </button>
+            
+            <input type="range" 
+                   class="volume-slider"
+                   min="0" 
+                   max="100" 
+                   value="100"
+                   aria-label="Volume">
+            
+            <!-- Settings -->
+            <div class="video-settings">
+                <!-- Captions -->
+                <button class="btn-icon" 
+                        aria-label="Captions" 
+                        data-action="captions">
+                    <svg aria-hidden="true">
+                        <use href="#icon-captions"></use>
+                    </svg>
+                </button>
+                
+                <!-- Speed -->
+                <div class="speed-selector">
+                    <label for="playback-speed" class="sr-only">Playback speed</label>
+                    <select id="playback-speed" aria-label="Playback speed">
+                        <option value="0.5">0.5x</option>
+                        <option value="0.75">0.75x</option>
+                        <option value="1" selected>1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="1.75">1.75x</option>
+                        <option value="2">2x</option>
+                    </select>
+                </div>
+                
+                <!-- Quality -->
+                <div class="quality-selector">
+                    <label for="video-quality" class="sr-only">Video quality</label>
+                    <select id="video-quality" aria-label="Video quality">
+                        {% if user.tier == 'basic' %}
+                        <option value="720">720p</option>
+                        {% elif user.tier == 'intermediate' %}
+                        <option value="720">720p</option>
+                        <option value="1080" selected>1080p</option>
+                        {% else %}
+                        <option value="720">720p</option>
+                        <option value="1080">1080p</option>
+                        <option value="2160" selected>4K</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Download (tier-gated) -->
+            {% if user.tier in ['intermediate', 'advanced'] %}
+            <button class="btn-icon" 
+                    aria-label="Download video" 
+                    data-action="download">
+                <svg aria-hidden="true">
+                    <use href="#icon-download"></use>
+                </svg>
+            </button>
+            {% else %}
+            <button class="btn-icon" 
+                    aria-label="Download video (upgrade required)" 
+                    disabled
+                    title="Upgrade to Intermediate for video downloads">
+                <svg aria-hidden="true">
+                    <use href="#icon-lock"></use>
+                </svg>
+            </button>
+            {% endif %}
+            
+            <!-- Picture-in-Picture -->
+            <button class="btn-icon" 
+                    aria-label="Picture-in-picture" 
+                    data-action="pip">
+                <svg aria-hidden="true">
+                    <use href="#icon-pip"></use>
+                </svg>
+            </button>
+            
+            <!-- Fullscreen -->
+            <button class="btn-icon" 
+                    aria-label="Fullscreen" 
+                    data-action="fullscreen">
+                <svg aria-hidden="true">
+                    <use href="#icon-fullscreen"></use>
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Transcript -->
+    {% if transcript_url %}
+    <div class="video-transcript">
+        <button aria-expanded="false" 
+                aria-controls="transcript-content">
+            Show Transcript
+        </button>
+        
+        <div id="transcript-content" 
+             class="transcript-content" 
+             hidden>
+            <!-- Transcript loaded via JavaScript -->
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- Keyboard Shortcuts Help -->
+    <div class="keyboard-shortcuts-hint">
+        <p>💡 Tip: Press <kbd>K</kbd> to play/pause, <kbd>←</kbd>/<kbd>→</kbd> to seek</p>
+        <button onclick="showShortcuts()">View all shortcuts</button>
+    </div>
+</div>
+
+<!-- SVG Icons -->
+<svg style="display: none;">
+    <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+    </symbol>
+    
+    <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+    </symbol>
+    
+    <symbol id="icon-volume" viewBox="0 0 24 24">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    </symbol>
+    
+    <symbol id="icon-captions" viewBox="0 0 24 24">
+        <path d="M19 4H5a2 2 0 00-2 2v12a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 7H9.5v-.5h-2v3h2V13H11v1c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zm7 0h-1.5v-.5h-2v3h2V13H18v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1z"/>
+    </symbol>
+    
+    <symbol id="icon-download" viewBox="0 0 24 24">
+        <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/>
+    </symbol>
+    
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+    </symbol>
+    
+    <symbol id="icon-pip" viewBox="0 0 24 24">
+        <path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98V5c0-1.1-.9-2-2-2zm0 16.01H3V4.98h18v14.03z"/>
+    </symbol>
+    
+    <symbol id="icon-fullscreen" viewBox="0 0 24 24">
+        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+    </symbol>
+</svg>
