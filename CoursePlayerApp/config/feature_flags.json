@@ -1,0 +1,273 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-01-12T00:00:00Z",
+  "features": {
+    "video_streaming": {
+      "enabled_tiers": ["basic", "intermediate", "advanced", "enterprise"],
+      "description": "Stream video lessons with HLS/DASH adaptive bitrate",
+      "always_available": true
+    },
+    "video_download": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Download videos for offline viewing",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to download videos for offline viewing",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "video_transcript": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "View video transcripts and captions",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to access video transcripts",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "video_annotations": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Add annotations and bookmarks to videos",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for video annotations and advanced features",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "slide_view": {
+      "enabled_tiers": ["basic", "intermediate", "advanced", "enterprise"],
+      "description": "View presentation slides in-app",
+      "always_available": true
+    },
+    "slide_download": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Export slides as PDF",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to download slides as PDF",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "slide_source_download": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Download source files (Marp/PPTX)",
+      "upgrade_message": "Upgrade to Advanced ($497/year) to download slide source files",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "notebook_view": {
+      "enabled_tiers": ["basic", "intermediate", "advanced", "enterprise"],
+      "description": "View notebooks as static HTML",
+      "always_available": true
+    },
+    "notebook_execution": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Execute notebooks interactively",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) for interactive notebook execution",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "notebook_download": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Download notebook files",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to download notebooks",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "notebook_gpu": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Access GPU-accelerated notebooks",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for GPU notebook access",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "notebook_persistence": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Server-side notebook persistence and auto-save",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for persistent notebook environments",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "ai_tutor": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Access AI-powered tutor for course help",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to get AI tutor assistance",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "ai_tutor_quota": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "quota_by_tier": {
+        "basic": 0,
+        "intermediate": 50,
+        "advanced": "unlimited",
+        "enterprise": "unlimited"
+      },
+      "quota_period": "monthly",
+      "quota_reset_day": 1,
+      "description": "Monthly quota for AI tutor questions",
+      "model_by_tier": {
+        "intermediate": "llama3.2:3b",
+        "advanced": "llama3.1:8b",
+        "enterprise": "llama3.1:8b"
+      },
+      "upgrade_message": "Upgrade to Advanced ($497/year) for unlimited AI tutor access",
+      "rollover": {
+        "enabled_tiers": ["advanced", "enterprise"],
+        "max_rollover": 100
+      }
+    },
+    "quiz_access": {
+      "enabled_tiers": ["basic", "intermediate", "advanced", "enterprise"],
+      "description": "Access quizzes and assessments",
+      "always_available": true
+    },
+    "quiz_analytics": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Detailed quiz performance analytics",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) for detailed analytics",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "progress_tracking": {
+      "enabled_tiers": ["basic", "intermediate", "advanced", "enterprise"],
+      "description": "Track course completion and progress",
+      "always_available": true
+    },
+    "progress_analytics": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Detailed learning analytics and insights",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) for detailed analytics",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "progress_export": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Export progress data",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to export your progress",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "certificate_generation": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Generate course completion certificates",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to receive completion certificates",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "certificate_type": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "types_by_tier": {
+        "basic": null,
+        "intermediate": "verifiable",
+        "advanced": "professional_signed",
+        "enterprise": "professional_signed"
+      },
+      "description": "Type of certificate based on tier"
+    },
+    "datasets": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Access to course datasets",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) to access course datasets",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "datasets_production": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Access to production-grade datasets",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for production-grade datasets",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "code_review": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "description": "Submit projects for code review",
+      "upgrade_message": "Upgrade to Intermediate ($247/year) for code review",
+      "upgrade_from": "basic",
+      "upgrade_to": "intermediate",
+      "upgrade_price": 247
+    },
+    "code_review_quota": {
+      "enabled_tiers": ["intermediate", "advanced", "enterprise"],
+      "quota_by_tier": {
+        "basic": 0,
+        "intermediate": 3,
+        "advanced": 5,
+        "enterprise": "unlimited"
+      },
+      "quota_period": "per_course",
+      "description": "Number of code review submissions per course"
+    },
+    "code_review_manual": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Manual code review by instructors",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for manual code review",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    },
+    "offline_mode": {
+      "enabled_tiers": ["advanced", "enterprise"],
+      "description": "Download offline course packages",
+      "upgrade_message": "Upgrade to Advanced ($497/year) for offline course packages",
+      "upgrade_from": "intermediate",
+      "upgrade_to": "advanced",
+      "upgrade_price": 250
+    }
+  },
+  "tier_badges": {
+    "basic": {
+      "color": "#10b981",
+      "emoji": "🟢",
+      "label": "Foundation Builder",
+      "description": "Perfect for getting started with data science"
+    },
+    "intermediate": {
+      "color": "#3b82f6",
+      "emoji": "🔵",
+      "label": "AI Practitioner",
+      "badge": "BEST VALUE",
+      "description": "Most popular tier with AI tutor and downloads"
+    },
+    "advanced": {
+      "color": "#8b5cf6",
+      "emoji": "🟣",
+      "label": "AI/ML Expert",
+      "badge": "COMMERCIAL LICENSE",
+      "description": "Full-featured tier with GPU access and unlimited AI"
+    },
+    "enterprise": {
+      "color": "#6366f1",
+      "emoji": "🔷",
+      "label": "Enterprise",
+      "badge": "TEAM LICENSE",
+      "description": "Multi-user organization license"
+    }
+  },
+  "tier_hierarchy": {
+    "basic": {
+      "level": 0,
+      "inherits_from": []
+    },
+    "intermediate": {
+      "level": 1,
+      "inherits_from": ["basic"]
+    },
+    "advanced": {
+      "level": 2,
+      "inherits_from": ["basic", "intermediate"]
+    },
+    "enterprise": {
+      "level": 3,
+      "inherits_from": ["basic", "intermediate", "advanced"]
+    }
+  }
+}
