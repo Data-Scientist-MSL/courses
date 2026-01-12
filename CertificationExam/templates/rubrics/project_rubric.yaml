@@ -1,0 +1,172 @@
+# Project Rubric Template
+
+rubric:
+  id: "project_rubric"
+  name: "Capstone Project Rubric"
+  description: "Rubric for evaluating capstone projects"
+  version: "1.0"
+  total_points: 100
+  
+  criteria:
+    - id: "requirements"
+      name: "Requirements Met"
+      description: "Does the project meet all requirements?"
+      weight: 25
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Exceeds all requirements"
+          indicators:
+            - "All requirements fully met"
+            - "Additional features implemented"
+            - "Demonstrates creativity"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Meets all requirements"
+          indicators:
+            - "All requirements met"
+            - "Satisfies specifications"
+        
+        - score: 50
+          label: "Basic"
+          description: "Meets most requirements"
+          indicators:
+            - "Most requirements met"
+            - "Minor features missing"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Missing significant requirements"
+          indicators:
+            - "Many requirements not met"
+            - "Major features missing"
+    
+    - id: "implementation"
+      name: "Implementation Quality"
+      description: "Quality of code implementation"
+      weight: 30
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Excellent implementation"
+          indicators:
+            - "Clean, well-organized code"
+            - "Efficient algorithms"
+            - "Best practices followed"
+            - "Scalable design"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Good implementation"
+          indicators:
+            - "Organized code"
+            - "Reasonable algorithms"
+            - "Generally follows best practices"
+        
+        - score: 50
+          label: "Basic"
+          description: "Basic implementation"
+          indicators:
+            - "Code works but disorganized"
+            - "Inefficient in places"
+            - "Some best practices ignored"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Poor implementation"
+          indicators:
+            - "Poorly organized code"
+            - "Very inefficient"
+            - "Many best practices violated"
+    
+    - id: "testing"
+      name: "Testing & Validation"
+      description: "Testing and validation approach"
+      weight: 20
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Comprehensive testing"
+          indicators:
+            - "Unit tests with high coverage (>80%)"
+            - "Integration tests included"
+            - "Edge cases tested"
+            - "Test documentation"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Good testing"
+          indicators:
+            - "Unit tests present (>60% coverage)"
+            - "Basic integration tests"
+            - "Main cases tested"
+        
+        - score: 50
+          label: "Basic"
+          description: "Basic testing"
+          indicators:
+            - "Some unit tests (<60% coverage)"
+            - "Limited test cases"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Minimal testing"
+          indicators:
+            - "Few or no tests"
+            - "No test coverage"
+    
+    - id: "documentation"
+      name: "Documentation"
+      description: "Project documentation quality"
+      weight: 25
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Excellent documentation"
+          indicators:
+            - "Comprehensive README with setup instructions"
+            - "API documentation (if applicable)"
+            - "Architecture diagram"
+            - "Usage examples"
+            - "Design decisions explained"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Good documentation"
+          indicators:
+            - "Good README"
+            - "Setup instructions clear"
+            - "Basic architecture description"
+            - "Some usage examples"
+        
+        - score: 50
+          label: "Basic"
+          description: "Basic documentation"
+          indicators:
+            - "Basic README"
+            - "Minimal setup instructions"
+            - "Limited documentation"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Poor documentation"
+          indicators:
+            - "No or very poor README"
+            - "Missing setup instructions"
+            - "No documentation"
+  
+  grading:
+    auto_publish: false
+    show_rubric_to_students: true
+    allow_regrade_requests: true
+    regrade_window_days: 7
+    peer_review:
+      enabled: true
+      reviewers_per_submission: 3
+      peer_review_weight: 20
+      anonymize: true

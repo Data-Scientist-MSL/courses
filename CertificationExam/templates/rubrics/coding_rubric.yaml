@@ -1,0 +1,179 @@
+# Coding Challenge Rubric Template
+
+rubric:
+  id: "coding_rubric"
+  name: "Coding Challenge Rubric"
+  description: "Rubric for evaluating coding submissions"
+  version: "1.0"
+  total_points: 100
+  
+  criteria:
+    - id: "correctness"
+      name: "Correctness"
+      description: "Does the code produce correct output?"
+      weight: 50
+      
+      levels:
+        - score: 100
+          label: "All Tests Pass"
+          description: "Code passes all test cases"
+          indicators:
+            - "100% test cases pass"
+            - "Handles all edge cases"
+            - "No runtime errors"
+        
+        - score: 75
+          label: "Most Tests Pass"
+          description: "Code passes 75-99% of test cases"
+          indicators:
+            - "Most test cases pass"
+            - "Minor edge case issues"
+        
+        - score: 50
+          label: "Some Tests Pass"
+          description: "Code passes 50-74% of test cases"
+          indicators:
+            - "Basic functionality works"
+            - "Several test failures"
+        
+        - score: 25
+          label: "Few Tests Pass"
+          description: "Code passes 25-49% of test cases"
+          indicators:
+            - "Significant functionality issues"
+            - "Many test failures"
+        
+        - score: 0
+          label: "No Tests Pass"
+          description: "Code fails all test cases or doesn't run"
+          indicators:
+            - "Code doesn't compile/run"
+            - "All tests fail"
+      
+      auto_grading:
+        enabled: true
+        method: "unit_tests"
+        config:
+          test_file: "tests/test_solution.py"
+          timeout: 30
+          python_version: "3.10"
+          allowed_imports: ["numpy", "pandas", "math"]
+          forbidden_imports: ["os", "sys", "subprocess"]
+    
+    - id: "code_quality"
+      name: "Code Quality"
+      description: "Is the code well-written and maintainable?"
+      weight: 30
+      
+      levels:
+        - score: 100
+          label: "Excellent"
+          description: "Excellent code quality"
+          indicators:
+            - "Follows PEP 8 style guide"
+            - "No linting errors"
+            - "Cyclomatic complexity < 10"
+            - "Clear variable names"
+            - "Efficient algorithms"
+        
+        - score: 75
+          label: "Good"
+          description: "Good code quality"
+          indicators:
+            - "Minor style issues"
+            - "Few linting warnings"
+            - "Complexity 10-15"
+            - "Readable code"
+        
+        - score: 50
+          label: "Fair"
+          description: "Fair code quality"
+          indicators:
+            - "Multiple style issues"
+            - "Several linting errors"
+            - "Complexity 15-20"
+            - "Some unclear variable names"
+        
+        - score: 25
+          label: "Poor"
+          description: "Poor code quality"
+          indicators:
+            - "Significant style violations"
+            - "Many linting errors"
+            - "Complexity > 20"
+            - "Hard to read"
+      
+      auto_grading:
+        enabled: true
+        method: "static_analysis"
+        config:
+          tools:
+            - name: "flake8"
+              max_errors: 5
+              weight: 0.4
+            - name: "pylint"
+              min_score: 7.0
+              weight: 0.4
+            - name: "radon"
+              max_complexity: 10
+              weight: 0.2
+    
+    - id: "documentation"
+      name: "Documentation"
+      description: "Is the code properly documented?"
+      weight: 20
+      
+      levels:
+        - score: 100
+          label: "Excellent"
+          description: "Comprehensive documentation"
+          indicators:
+            - "Complete docstrings (Google/NumPy style)"
+            - "Type hints on all functions"
+            - "Comments for complex logic"
+            - "Clear function/variable names"
+        
+        - score: 75
+          label: "Good"
+          description: "Good documentation"
+          indicators:
+            - "Basic docstrings"
+            - "Some type hints"
+            - "Minimal comments"
+        
+        - score: 50
+          label: "Fair"
+          description: "Fair documentation"
+          indicators:
+            - "Sparse docstrings"
+            - "Few type hints"
+            - "Limited comments"
+        
+        - score: 25
+          label: "Poor"
+          description: "Poor documentation"
+          indicators:
+            - "No docstrings"
+            - "No type hints"
+            - "No comments"
+      
+      auto_grading:
+        enabled: true
+        method: "pattern_matching"
+        config:
+          patterns:
+            - name: "docstring_present"
+              regex: '""".*?"""'
+              weight: 0.5
+            - name: "type_hints"
+              regex: ':\s*(int|str|float|bool|List|Dict)'
+              weight: 0.3
+            - name: "comments"
+              regex: '#.*'
+              weight: 0.2
+  
+  grading:
+    auto_publish: false
+    show_rubric_to_students: true
+    allow_regrade_requests: true
+    regrade_window_days: 7

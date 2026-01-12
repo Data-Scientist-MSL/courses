@@ -1,0 +1,165 @@
+{
+  "template_id": "modern_certificate",
+  "name": "Modern Certificate Template",
+  "version": "1.0.0",
+  "description": "Contemporary minimalist certificate design",
+  
+  "page": {
+    "size": "letter",
+    "orientation": "landscape",
+    "dimensions": {
+      "width": 11,
+      "height": 8.5,
+      "unit": "inches"
+    },
+    "dpi": 300,
+    "margins": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+    }
+  },
+  
+  "background": {
+    "type": "gradient",
+    "gradient": {
+      "type": "linear",
+      "angle": 135,
+      "colors": [
+        {"color": "#667EEA", "position": 0},
+        {"color": "#764BA2", "position": 100}
+      ]
+    }
+  },
+  
+  "elements": [
+    {
+      "type": "logo",
+      "id": "institution_logo",
+      "position": {"x": 100, "y": 50},
+      "size": {"width": 120, "height": 120},
+      "image_url": "{{organization.logo_url}}",
+      "alignment": "left"
+    },
+    {
+      "type": "text",
+      "id": "cert_title",
+      "content": "Certificate",
+      "position": {"x": 550, "y": 180},
+      "font": {
+        "family": "Montserrat",
+        "size": 72,
+        "weight": "bold",
+        "color": "#FFFFFF"
+      },
+      "alignment": "center"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "content": "OF ACHIEVEMENT",
+      "position": {"x": 550, "y": 240},
+      "font": {
+        "family": "Montserrat",
+        "size": 18,
+        "weight": "normal",
+        "color": "#FFFFFF",
+        "letter_spacing": 5
+      },
+      "alignment": "center",
+      "text_transform": "uppercase"
+    },
+    {
+      "type": "dynamic_text",
+      "id": "student_name",
+      "field": "student.full_name",
+      "position": {"x": 550, "y": 330},
+      "font": {
+        "family": "Raleway",
+        "size": 48,
+        "weight": "bold",
+        "color": "#FFFFFF"
+      },
+      "alignment": "center"
+    },
+    {
+      "type": "text",
+      "id": "completion_text",
+      "content": "has successfully completed",
+      "position": {"x": 550, "y": 390},
+      "font": {
+        "family": "Raleway",
+        "size": 16,
+        "color": "#FFFFFF"
+      },
+      "alignment": "center"
+    },
+    {
+      "type": "dynamic_text",
+      "id": "course_title",
+      "field": "course.title",
+      "position": {"x": 550, "y": 440},
+      "font": {
+        "family": "Raleway",
+        "size": 28,
+        "weight": "bold",
+        "color": "#FFFFFF"
+      },
+      "alignment": "center"
+    },
+    {
+      "type": "dynamic_text",
+      "id": "date_grade",
+      "field": "completion.date_and_grade",
+      "position": {"x": 550, "y": 490},
+      "font": {
+        "family": "Raleway",
+        "size": 14,
+        "color": "#FFFFFF"
+      },
+      "alignment": "center",
+      "template": "Completed on {date} with grade {grade}"
+    },
+    {
+      "type": "signature",
+      "id": "instructor_sig",
+      "signer_role": "instructor",
+      "position": {"x": 300, "y": 560},
+      "size": {"width": 180, "height": 50}
+    },
+    {
+      "type": "dynamic_text",
+      "id": "instructor_name",
+      "field": "signers.instructor.name",
+      "position": {"x": 390, "y": 620},
+      "font": {
+        "family": "Raleway",
+        "size": 12,
+        "color": "#FFFFFF"
+      },
+      "alignment": "center"
+    },
+    {
+      "type": "qr_code",
+      "id": "verification_qr",
+      "position": {"x": 900, "y": 550},
+      "size": {"width": 120, "height": 120},
+      "data": "https://gai-observe.online/verify/{{certificate.id}}",
+      "error_correction": "H",
+      "background_color": "#FFFFFF"
+    },
+    {
+      "type": "dynamic_text",
+      "id": "cert_id",
+      "field": "certificate.id",
+      "position": {"x": 100, "y": 700},
+      "font": {
+        "family": "Courier New",
+        "size": 9,
+        "color": "#FFFFFF"
+      },
+      "alignment": "left"
+    }
+  ]
+}
