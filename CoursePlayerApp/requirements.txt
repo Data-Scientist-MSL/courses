@@ -1,0 +1,132 @@
+# CoursePlayerApp - Python Dependencies
+
+# Web Framework
+fastapi==0.109.1  # Updated to fix ReDoS vulnerability
+uvicorn[standard]==0.24.0
+python-multipart==0.0.18  # Updated to fix DoS and ReDoS vulnerabilities
+
+# Database
+sqlalchemy==2.0.23
+alembic==1.12.1
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Cache & Queue
+redis==5.0.1
+celery==5.3.4
+
+# Authentication & Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# External APIs
+httpx==0.25.1
+aiohttp==3.13.3  # Updated to fix zip bomb, DoS, and directory traversal vulnerabilities
+
+# AWS S3 / Cloudflare R2
+boto3==1.29.7
+botocore==1.32.7
+
+# Email
+sendgrid==6.11.0
+
+# Validation
+pydantic==2.5.0
+pydantic-settings==2.1.0
+email-validator==2.1.0
+
+# Utilities
+python-dotenv==1.0.0
+tenacity==8.2.3  # Retry logic
+pybreaker==1.0.1  # Circuit breaker
+
+# Monitoring
+prometheus-client==0.19.0
+sentry-sdk[fastapi]==1.38.0
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.25.1  # For testing async endpoints
+respx==0.20.2  # Mock httpx requests
+faker==20.1.0  # Generate test data
+
+# Development
+black==23.11.0  # Code formatting
+ruff==0.1.6  # Linting
+mypy==1.7.1  # Type checking
+pre-commit==3.5.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.4.14
+
+# Optional: Streamlit (for MVP frontend)
+streamlit==1.28.2
+streamlit-player==0.1.5
+streamlit-option-menu==0.3.6
+
+# Optional: OLLAMA client
+# (OLLAMA itself runs as separate service)
+# ollama-python==0.1.0  # If using Python SDK
+
+# Database migrations
+alembic==1.12.1
+
+# Date/Time
+python-dateutil==2.8.2
+pytz==2023.3
+
+# YAML parsing (for config files)
+pyyaml==6.0.1
+
+# JWT
+pyjwt==2.8.0
+
+# Cryptography
+cryptography==42.0.4  # Updated to fix NULL pointer dereference and Bleichenbacher timing oracle vulnerabilities
+
+# Markdown (for AI tutor responses)
+markdown==3.5.1
+
+# Background tasks
+celery==5.3.4
+redis==5.0.1
+
+# Rate limiting
+slowapi==0.1.9
+
+# CORS
+fastapi-cors==0.0.6
+
+# Health checks
+py-healthcheck==1.10.1
+
+# Logging
+loguru==0.7.2
+
+# Environment variables
+python-decouple==3.8
+
+# File handling
+python-magic==0.4.27
+Pillow==10.3.0  # Updated to fix buffer overflow vulnerability
+
+# WebSocket support (for real-time features)
+websockets==12.0
+
+# JSON handling
+orjson==3.9.15  # Updated to fix recursion limit vulnerability
+
+# Templating (if using Jinja2 for HTML templates)
+jinja2==3.1.2
+
+# Form validation
+wtforms==3.1.1
+
+# Password strength checking
+zxcvbn==4.4.28
+
+# Accessibility testing
+axe-selenium-python==2.1.6  # For automated accessibility tests

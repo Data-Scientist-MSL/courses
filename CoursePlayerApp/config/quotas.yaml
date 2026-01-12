@@ -1,0 +1,123 @@
+# Quota Configuration
+# Defines usage limits for tier-based features
+
+quotas:
+  description: "Monthly usage quotas for CoursePlayerApp features"
+  reset_schedule: "First day of each month at 00:00 UTC"
+  
+  # AI Tutor quotas (questions per month)
+  ai_tutor:
+    basic: 0
+    intermediate: 50
+    advanced: -1  # unlimited
+    
+    # Quota warnings
+    warnings:
+      - threshold: 0.8  # 80% used
+        message: "You've used {used} of {limit} AI Tutor questions this month"
+      - threshold: 0.95  # 95% used
+        message: "Only {remaining} AI Tutor questions remaining! Upgrade for unlimited access"
+    
+    # Quota exceeded message
+    exceeded_message: |
+      You've reached your monthly AI Tutor limit ({limit} questions).
+      Upgrade to Advanced tier for unlimited questions!
+  
+  # Lab hours quotas (hours per month)
+  lab_hours:
+    basic: 0  # View-only, no interactive time
+    intermediate: 100
+    advanced: -1  # unlimited
+    
+    # Track time in 5-minute increments
+    tracking_interval_seconds: 300
+    
+    warnings:
+      - threshold: 0.8
+        message: "You've used {used} of {limit} lab hours this month"
+      - threshold: 0.95
+        message: "Only {remaining} lab hours remaining! Consider upgrading"
+    
+    exceeded_message: |
+      You've used all {limit} lab hours for this month.
+      Upgrade to Advanced for unlimited lab access!
+  
+  # Video download quotas (GB per month)
+  video_download:
+    basic: 0
+    intermediate: 50
+    advanced: -1  # unlimited
+    
+    warnings:
+      - threshold: 0.8
+        message: "You've downloaded {used}GB of {limit}GB this month"
+      - threshold: 0.95
+        message: "Only {remaining}GB download quota remaining"
+    
+    exceeded_message: |
+      You've reached your monthly download limit ({limit}GB).
+      Upgrade to Advanced for unlimited downloads!
+  
+  # Code/dataset download quotas (GB per month)
+  code_download:
+    basic: 0
+    intermediate: 5
+    advanced: -1  # unlimited
+    
+    warnings:
+      - threshold: 0.9
+        message: "You've used {used}GB of {limit}GB for code downloads"
+    
+    exceeded_message: "Monthly code download quota ({limit}GB) exceeded"
+
+# Quota tracking configuration
+tracking:
+  # Store quota usage in Redis
+  redis_key_format: "{quota_type}:{user_id}:{year}-{month}"
+  
+  # TTL for quota keys (90 days to allow for historical queries)
+  ttl_days: 90
+  
+  # Batch update interval (update DB every N seconds)
+  batch_update_interval_seconds: 300
+
+# Grace period configuration
+grace_period:
+  # Allow slight overages (up to 5%) without hard blocking
+  enabled: true
+  overage_percentage: 5
+  
+  # Soft limits vs hard limits
+  soft_limit_message: |
+    You've exceeded your quota by {overage}%. 
+    This is allowed temporarily, but please consider upgrading.
+  
+  hard_limit_message: |
+    You've reached the maximum allowed overage.
+    Upgrade your tier to continue using this feature.
+
+# Rollover configuration
+rollover:
+  # Allow unused quota to roll over (up to 20% of monthly limit)
+  enabled: false  # Disabled by default
+  max_rollover_percentage: 20
+  
+  # Only applies to these quota types
+  applicable_to:
+    - ai_tutor
+    - lab_hours
+
+# Analytics configuration
+analytics:
+  # Track quota exhaustion events
+  track_exhaustion: true
+  
+  # Track quota warning events
+  track_warnings: true
+  
+  # Metrics to collect
+  metrics:
+    - quota_usage_percentage
+    - quota_exhaustion_rate
+    - average_days_to_exhaustion
+    - upgrade_conversion_after_exhaustion

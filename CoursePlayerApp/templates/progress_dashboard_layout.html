@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Progress - CoursePlayerApp</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/progress.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner" class="site-header">
+        <!-- Header content same as course_page_layout.html -->
+    </header>
+    
+    <main id="main-content" role="main" class="progress-dashboard">
+        <div class="container">
+            <h1>My Learning Progress</h1>
+            
+            <!-- Overall Progress Summary -->
+            <section class="progress-summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading" class="sr-only">Progress Summary</h2>
+                
+                <div class="summary-grid">
+                    <!-- Overall Completion -->
+                    <div class="summary-card">
+                        <div class="card-icon" aria-hidden="true">📊</div>
+                        <h3>Overall Progress</h3>
+                        <div class="progress-circle" role="progressbar" 
+                             aria-valuenow="{{ overall_progress }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100"
+                             aria-label="Overall completion">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="10"/>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="#0066CC" stroke-width="10"
+                                        stroke-dasharray="{{ overall_progress * 2.827 }} 282.7"
+                                        transform="rotate(-90 50 50)"/>
+                            </svg>
+                            <span class="percentage">{{ overall_progress }}%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Courses Completed -->
+                    <div class="summary-card">
+                        <div class="card-icon" aria-hidden="true">🎓</div>
+                        <h3>Courses Completed</h3>
+                        <div class="stat-large">
+                            {{ courses_completed }}/{{ courses_enrolled }}
+                        </div>
+                        <p class="stat-label">courses</p>
+                    </div>
+                    
+                    <!-- Time Spent -->
+                    <div class="summary-card">
+                        <div class="card-icon" aria-hidden="true">⏱️</div>
+                        <h3>Time Spent Learning</h3>
+                        <div class="stat-large">{{ total_hours }}h {{ total_minutes }}m</div>
+                        <p class="stat-label">total time</p>
+                    </div>
+                    
+                    <!-- Learning Streak -->
+                    <div class="summary-card">
+                        <div class="card-icon" aria-hidden="true">🔥</div>
+                        <h3>Learning Streak</h3>
+                        <div class="stat-large">{{ current_streak }}</div>
+                        <p class="stat-label">days in a row</p>
+                        <p class="stat-secondary">Best: {{ longest_streak }} days</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Active Courses -->
+            <section class="active-courses" aria-labelledby="courses-heading">
+                <h2 id="courses-heading">Active Courses</h2>
+                
+                <div class="course-list">
+                    {% for course in active_courses %}
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h3>
+                                <a href="/courses/{{ course.id }}">
+                                    {{ course.title }}
+                                </a>
+                            </h3>
+                            <span class="last-accessed">
+                                Last accessed: {{ course.last_accessed | timeago }}
+                            </span>
+                        </div>
+                        
+                        <div class="course-progress">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" 
+                                     role="progressbar"
+                                     aria-valuenow="{{ course.progress }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     aria-label="Course progress">
+                                    <div class="progress-fill" 
+                                         style="width: {{ course.progress }}%"></div>
+                                </div>
+                                <span class="progress-percentage">{{ course.progress }}%</span>
+                            </div>
+                            
+                            <div class="progress-details">
+                                <span>{{ course.lessons_completed }}/{{ course.total_lessons }} lessons</span>
+                                <span>•</span>
+                                <span>{{ course.labs_completed }}/{{ course.total_labs }} labs</span>
+                                {% if course.quizzes_total > 0 %}
+                                <span>•</span>
+                                <span>{{ course.quizzes_passed }}/{{ course.quizzes_total }} quizzes</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="course-actions">
+                            {% if course.current_lesson %}
+                            <a href="/courses/{{ course.id }}/lessons/{{ course.current_lesson }}" 
+                               class="btn-primary">
+                                Continue Learning →
+                            </a>
+                            {% else %}
+                            <a href="/courses/{{ course.id }}" class="btn-secondary">
+                                View Course
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            
+            <!-- Achievements -->
+            <section class="achievements" aria-labelledby="achievements-heading">
+                <div class="section-header">
+                    <h2 id="achievements-heading">Achievements Unlocked</h2>
+                    <p>{{ achievements_unlocked }}/{{ achievements_total }} achievements 
+                       ({{ achievements_points }} points)</p>
+                </div>
+                
+                <div class="achievement-grid">
+                    {% for achievement in recent_achievements %}
+                    <div class="achievement-card unlocked">
+                        <div class="achievement-icon" 
+                             role="img" 
+                             aria-label="{{ achievement.name }}">
+                            {{ achievement.icon }}
+                        </div>
+                        <h3>{{ achievement.name }}</h3>
+                        <p>{{ achievement.description }}</p>
+                        <div class="achievement-meta">
+                            <span class="points">{{ achievement.points }} pts</span>
+                            <span class="rarity {{ achievement.rarity }}">{{ achievement.rarity | capitalize }}</span>
+                            <span class="unlocked-date">{{ achievement.unlocked_at | date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <!-- Show a few locked achievements -->
+                    {% for achievement in locked_achievements[:3] %}
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon locked" 
+                             role="img" 
+                             aria-label="Locked achievement">
+                            🔒
+                        </div>
+                        <h3>{{ achievement.name }}</h3>
+                        <p>{{ achievement.description }}</p>
+                        <div class="achievement-meta">
+                            <span class="points">{{ achievement.points }} pts</span>
+                            <span class="rarity {{ achievement.rarity }}">{{ achievement.rarity | capitalize }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="section-footer">
+                    <a href="/achievements" class="btn-secondary">
+                        View All Achievements →
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Certificates -->
+            {% if certificates %}
+            <section class="certificates" aria-labelledby="certificates-heading">
+                <h2 id="certificates-heading">Certificates Earned</h2>
+                
+                <div class="certificate-list">
+                    {% for cert in certificates %}
+                    <div class="certificate-card">
+                        <div class="certificate-preview">
+                            <img src="{{ cert.thumbnail_url }}" 
+                                 alt="Certificate for {{ cert.course_title }}">
+                        </div>
+                        <div class="certificate-info">
+                            <h3>{{ cert.course_title }}</h3>
+                            <p class="cert-meta">
+                                Issued: {{ cert.issued_at | date }}<br>
+                                Grade: {{ cert.grade }}%
+                                {% if cert.blockchain_verified %}
+                                <span class="verified-badge" 
+                                      aria-label="Blockchain verified">
+                                    ✓ Blockchain Verified
+                                </span>
+                                {% endif %}
+                            </p>
+                            <div class="certificate-actions">
+                                <a href="{{ cert.pdf_url }}" 
+                                   download 
+                                   class="btn-secondary">
+                                    ⬇️ Download PDF
+                                </a>
+                                <a href="{{ cert.verification_url }}" 
+                                   target="_blank" 
+                                   class="btn-secondary">
+                                    🔗 Verify
+                                </a>
+                                <button onclick="shareOnLinkedIn('{{ cert.id }}')" 
+                                        class="btn-secondary">
+                                    Share on LinkedIn
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+            
+            <!-- Learning Analytics (Advanced Tier Only) -->
+            {% if user.tier == 'advanced' %}
+            <section class="analytics" aria-labelledby="analytics-heading">
+                <h2 id="analytics-heading">Learning Analytics</h2>
+                
+                <div class="analytics-grid">
+                    <!-- Learning Pace Chart -->
+                    <div class="chart-container">
+                        <h3>Learning Pace (Last 30 Days)</h3>
+                        <canvas id="learning-pace-chart" 
+                                role="img" 
+                                aria-label="Line chart showing daily learning minutes"></canvas>
+                    </div>
+                    
+                    <!-- Time Distribution -->
+                    <div class="chart-container">
+                        <h3>Time Distribution by Course</h3>
+                        <canvas id="time-distribution-chart" 
+                                role="img" 
+                                aria-label="Pie chart showing time spent per course"></canvas>
+                    </div>
+                    
+                    <!-- Performance Trends -->
+                    <div class="chart-container">
+                        <h3>Quiz & Lab Performance</h3>
+                        <canvas id="performance-chart" 
+                                role="img" 
+                                aria-label="Bar chart showing average scores"></canvas>
+                    </div>
+                    
+                    <!-- Study Patterns -->
+                    <div class="chart-container">
+                        <h3>Study Patterns (Hour of Day)</h3>
+                        <canvas id="study-patterns-chart" 
+                                role="img" 
+                                aria-label="Heatmap showing study activity by hour"></canvas>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+        </div>
+    </main>
+    
+    <footer role="contentinfo" class="site-footer">
+        <!-- Footer content same as course_page_layout.html -->
+    </footer>
+    
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/progress-dashboard.js"></script>
+    {% if user.tier == 'advanced' %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="/static/js/analytics-charts.js"></script>
+    {% endif %}
+</body>
+</html>
