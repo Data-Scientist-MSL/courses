@@ -1,0 +1,220 @@
+# Proctoring Rules Configuration
+
+proctoring:
+  # Strictness levels
+  strictness_levels:
+    relaxed:
+      description: "Minimal monitoring for low-stakes assessments"
+      monitoring_frequency: 10  # seconds
+      
+      identity:
+        face_verification_frequency: 600  # 10 minutes
+        liveness_check: false
+      
+      attention:
+        gaze_tracking: false
+        off_screen_warning_threshold: 30
+        off_screen_incident_threshold: 60
+      
+      environment:
+        pre_exam_scan: false
+        periodic_scans: false
+        object_detection: false
+      
+      audio:
+        monitoring: false
+      
+      screen:
+        tab_switch_detection: false
+      
+      behavior:
+        anomaly_detection: false
+      
+      recording:
+        webcam: false
+        screen: false
+        audio: false
+    
+    standard:
+      description: "Balanced monitoring for typical exams"
+      monitoring_frequency: 5  # seconds
+      
+      identity:
+        face_verification_frequency: 300  # 5 minutes
+        liveness_check: true
+      
+      attention:
+        gaze_tracking: true
+        off_screen_warning_threshold: 10
+        off_screen_incident_threshold: 30
+      
+      environment:
+        pre_exam_scan: true
+        periodic_scans: true
+        periodic_scan_interval: 1800  # 30 minutes
+        object_detection: true
+      
+      audio:
+        monitoring: true
+        voice_activity_detection: true
+        speaker_counting: true
+      
+      screen:
+        tab_switch_detection: true
+        max_switches_before_warning: 3
+        max_switches_before_incident: 5
+      
+      behavior:
+        anomaly_detection: true
+      
+      recording:
+        webcam: true
+        screen: false
+        audio: "incident_only"
+    
+    strict:
+      description: "Comprehensive monitoring for high-stakes exams"
+      monitoring_frequency: 2  # seconds
+      
+      identity:
+        face_verification_frequency: 180  # 3 minutes
+        liveness_check: true
+        challenge_response: true
+      
+      attention:
+        gaze_tracking: true
+        off_screen_warning_threshold: 5
+        off_screen_incident_threshold: 15
+      
+      environment:
+        pre_exam_scan: true
+        human_approval_required: true
+        periodic_scans: true
+        periodic_scan_interval: 900  # 15 minutes
+        random_scans: true
+        object_detection: true
+      
+      audio:
+        monitoring: true
+        voice_activity_detection: true
+        speaker_counting: true
+        keyword_detection: true
+      
+      screen:
+        tab_switch_detection: true
+        max_switches_before_warning: 1
+        max_switches_before_incident: 2
+        lockdown_mode: true
+      
+      behavior:
+        anomaly_detection: true
+        keystroke_dynamics: true
+        mouse_tracking: true
+      
+      recording:
+        webcam: true
+        screen: true
+        audio: "continuous"
+
+# Risk scoring thresholds
+risk_scoring:
+  thresholds:
+    low: 30
+    medium: 60
+    high: 80
+    critical: 100
+  
+  weights:
+    identity: 0.30
+    attention: 0.15
+    environment: 0.25
+    audio: 0.15
+    screen: 0.10
+    behavior: 0.05
+
+# Actions based on risk level
+actions:
+  low_risk:
+    action: "continue"
+    log: true
+    notify_student: false
+  
+  medium_risk:
+    action: "warn_student"
+    log: true
+    notify_student: true
+    increase_monitoring: true
+  
+  high_risk:
+    action: "flag_for_review"
+    log: true
+    notify_student: true
+    notify_instructor: true
+    save_recording_segment: true
+  
+  critical_risk:
+    action: "request_human_review"
+    log: true
+    pause_exam: true
+    notify_student: true
+    notify_proctor: true
+    save_recording_segment: true
+
+# Recording settings
+recording:
+  retention:
+    default_days: 90
+    academic_integrity_case_days: 365
+    auto_delete: true
+  
+  encryption:
+    algorithm: "AES-256"
+    encrypt_before_upload: true
+  
+  storage:
+    provider: "s3"
+    bucket: "certificationexam-recordings"
+  
+  access_control:
+    authorized_roles:
+      - "academic_integrity_officer"
+      - "instructor"
+      - "admin"
+    audit_log: true
+
+# Privacy settings
+privacy:
+  face_data:
+    store_embeddings_only: true
+    delete_raw_images: true
+    embedding_encryption: true
+  
+  audio:
+    process_in_realtime: true
+    store_only_if_incident: true
+  
+  student_access:
+    can_view_own_recordings: true
+    can_request_deletion: true
+    can_appeal_violations: true
+
+# Accommodations
+accommodations:
+  vision_impaired:
+    relaxed_gaze_tracking: true
+    wider_attention_thresholds: true
+    extended_verification_time: true
+  
+  hearing_impaired:
+    disable_audio_monitoring: true
+    visual_alerts_only: true
+  
+  motor_impaired:
+    alternative_id_verification: true
+    relaxed_face_position: true
+    assistive_device_allowed: true
+  
+  cognitive:
+    reduced_monitoring_frequency: true
+    gentle_warnings: true
+    no_timer_display: true

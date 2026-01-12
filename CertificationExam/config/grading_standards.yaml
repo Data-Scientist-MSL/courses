@@ -1,0 +1,239 @@
+# Grading Standards Configuration
+
+grading:
+  # Auto-grading settings
+  auto_grading:
+    mcq:
+      enabled: true
+      instant_feedback: true
+      partial_credit: true
+    
+    coding:
+      enabled: true
+      timeout_per_test: 30  # seconds
+      memory_limit: 512  # MB
+      sandbox: true
+      allowed_languages:
+        - python
+        - javascript
+        - java
+        - cpp
+    
+    fill_blank:
+      enabled: true
+      fuzzy_match: true
+      threshold: 0.90
+      case_sensitive: false
+    
+    pattern_matching:
+      enabled: true
+      fuzzy_match: true
+      threshold: 0.85
+
+  # AI-assisted grading
+  ai_grading:
+    enabled: true
+    
+    essay:
+      model: "ollama:llama3"
+      confidence_threshold: 0.75
+      human_review_if_below_threshold: true
+      
+      evaluation_criteria:
+        - thesis_argument
+        - evidence_support
+        - organization
+        - mechanics
+    
+    short_answer:
+      model: "ollama:llama3"
+      confidence_threshold: 0.80
+      keyword_matching: true
+    
+    plagiarism_detection:
+      enabled: true
+      threshold: 15  # percent similarity
+      check_against:
+        - internet
+        - student_submissions
+        - known_sources
+
+  # Manual grading
+  manual_grading:
+    blind_grading:
+      enabled: true
+      default: true
+    
+    multiple_graders:
+      enabled_for_high_stakes: true
+      min_graders: 2
+      reconciliation_threshold: 10  # points difference requiring reconciliation
+    
+    grading_queue:
+      priority:
+        - high_stakes_exams
+        - approaching_deadline
+        - appeals
+      
+      assignment:
+        method: "round_robin"  # or "expertise_based"
+        max_per_grader: 50
+    
+    calibration:
+      frequency: "per_exam"
+      sample_size: 5
+      inter_rater_reliability_target: 0.85
+
+  # Rubric standards
+  rubrics:
+    required_for:
+      - essay
+      - project
+      - coding_quality
+    
+    validation:
+      total_weight_must_equal_100: true
+      min_levels_per_criterion: 3
+      clear_level_descriptions: true
+    
+    student_visibility:
+      show_before_exam: true
+      show_after_grading: true
+
+  # Grading timeline
+  timeline:
+    auto_grading: "immediate"
+    ai_assisted: "within_24_hours"
+    manual_grading: "within_72_hours"
+    appeals: "within_7_days"
+
+  # Grade calculation
+  calculation:
+    rounding: "nearest_integer"
+    
+    weighting:
+      criterion_based: true
+      support_extra_credit: true
+    
+    curves:
+      enabled: false  # Instructor can enable
+      methods:
+        - linear_scaling
+        - bell_curve
+        - percentile_based
+
+  # Feedback standards
+  feedback:
+    required_elements:
+      - criterion_scores
+      - total_score
+      - qualitative_feedback
+    
+    recommended_elements:
+      - strengths
+      - areas_for_improvement
+      - specific_examples
+      - actionable_suggestions
+    
+    tone:
+      constructive: true
+      encouraging: true
+      specific: true
+
+  # Grade publication
+  publication:
+    auto_publish:
+      mcq: true
+      coding_auto_graded: true
+      ai_assisted_high_confidence: false
+      manual_graded: false
+    
+    notification:
+      email_students: true
+      dashboard_update: true
+    
+    visibility:
+      show_score: true
+      show_breakdown: true
+      show_rubric_levels: true
+      show_peer_comparison: false  # Privacy
+
+  # Appeals process
+  appeals:
+    enabled: true
+    window_days: 7
+    
+    valid_reasons:
+      - grading_error
+      - rubric_misapplied
+      - answer_not_fully_considered
+      - bias_suspected
+    
+    process:
+      - student_submits_justification
+      - original_grader_reviews
+      - instructor_makes_final_decision
+      - notify_within_3_days
+    
+    limitations:
+      max_per_exam: 2
+      cannot_appeal_auto_graded_mcq: true
+
+  # Academic integrity
+  integrity:
+    plagiarism_action:
+      - flag_for_review
+      - notify_instructor
+      - notify_academic_integrity_office
+    
+    cheating_detection:
+      - proctoring_incidents
+      - answer_similarity_detection
+      - timing_anomalies
+    
+    violation_consequences:
+      - grade_penalty
+      - exam_invalidation
+      - academic_integrity_hearing
+
+  # Quality assurance
+  quality_assurance:
+    inter_rater_reliability:
+      monitor: true
+      target: 0.85
+      alert_if_below: 0.75
+    
+    grader_performance:
+      track: true
+      metrics:
+        - grading_speed
+        - consistency
+        - student_appeal_rate
+    
+    grade_distribution_analysis:
+      enabled: true
+      alert_if_unusual: true
+
+# Passing criteria
+passing:
+  default_threshold: 70  # percent
+  
+  grade_scale:
+    A: [90, 100]
+    B: [80, 89]
+    C: [70, 79]
+    D: [60, 69]
+    F: [0, 59]
+  
+  honors:
+    summa_cum_laude: 97
+    magna_cum_laude: 93
+    cum_laude: 90
+
+# Certificate generation triggers
+certificate:
+  auto_generate_if_passed: true
+  minimum_score: 70
+  blockchain_issuance_for_tiers:
+    - advanced
+    - enterprise

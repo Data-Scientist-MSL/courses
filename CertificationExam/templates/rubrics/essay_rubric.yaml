@@ -1,0 +1,210 @@
+# Essay Rubric Template
+
+rubric:
+  id: "essay_rubric"
+  name: "Analytical Essay Rubric"
+  description: "Rubric for evaluating analytical essays"
+  version: "1.0"
+  total_points: 100
+  
+  criteria:
+    - id: "thesis_argument"
+      name: "Thesis & Argument"
+      description: "Quality of thesis statement and argument development"
+      weight: 30
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Clear, insightful thesis with compelling, well-developed argument"
+          indicators:
+            - "Thesis is specific and arguable"
+            - "Argument is logical and well-developed"
+            - "Demonstrates critical thinking"
+            - "Original insights and analysis"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Clear thesis with solid argument"
+          indicators:
+            - "Thesis is clear and arguable"
+            - "Argument is coherent"
+            - "Shows understanding of topic"
+            - "Some analysis present"
+        
+        - score: 50
+          label: "Basic"
+          description: "Thesis present but argument is weak"
+          indicators:
+            - "Thesis is vague or too broad"
+            - "Argument lacks depth"
+            - "Limited critical thinking"
+            - "Mostly summary, not analysis"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Unclear or missing thesis"
+          indicators:
+            - "No clear thesis"
+            - "Argument is incoherent"
+            - "Lacks understanding"
+            - "No analysis"
+      
+      auto_grading:
+        enabled: true
+        method: "ai_evaluation"
+        config:
+          model: "ollama:llama3"
+          confidence_threshold: 0.75
+    
+    - id: "evidence"
+      name: "Evidence & Support"
+      description: "Use of evidence from credible sources"
+      weight: 30
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Excellent use of evidence from multiple credible sources"
+          indicators:
+            - "Multiple relevant sources cited"
+            - "Evidence is well-integrated"
+            - "Sources are credible and recent"
+            - "Proper citations (APA/MLA)"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Good use of evidence"
+          indicators:
+            - "Several sources cited"
+            - "Evidence supports argument"
+            - "Sources are generally credible"
+            - "Citations mostly correct"
+        
+        - score: 50
+          label: "Basic"
+          description: "Limited evidence"
+          indicators:
+            - "Few sources cited"
+            - "Evidence weakly supports argument"
+            - "Some sources questionable"
+            - "Citation errors"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Insufficient or no evidence"
+          indicators:
+            - "No sources cited"
+            - "No evidence provided"
+            - "Claims unsupported"
+      
+      auto_grading:
+        enabled: true
+        method: "ai_evaluation"
+    
+    - id: "organization"
+      name: "Organization & Structure"
+      description: "Essay structure and flow"
+      weight: 20
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Excellent organization with clear flow"
+          indicators:
+            - "Logical progression of ideas"
+            - "Effective transitions between paragraphs"
+            - "Strong introduction and conclusion"
+            - "Each paragraph has clear focus"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Good organization"
+          indicators:
+            - "Generally logical structure"
+            - "Adequate transitions"
+            - "Clear introduction and conclusion"
+        
+        - score: 50
+          label: "Basic"
+          description: "Basic organization"
+          indicators:
+            - "Some organizational issues"
+            - "Weak transitions"
+            - "Introduction or conclusion weak"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Poor organization"
+          indicators:
+            - "No clear structure"
+            - "Ideas jump around"
+            - "Weak or missing intro/conclusion"
+      
+      auto_grading:
+        enabled: true
+        method: "ai_evaluation"
+    
+    - id: "mechanics"
+      name: "Grammar & Mechanics"
+      description: "Grammar, spelling, and punctuation"
+      weight: 20
+      
+      levels:
+        - score: 100
+          label: "Exemplary"
+          description: "Virtually error-free"
+          indicators:
+            - "No errors in grammar"
+            - "No spelling errors"
+            - "Perfect punctuation"
+        
+        - score: 75
+          label: "Proficient"
+          description: "Few minor errors"
+          indicators:
+            - "Minor grammar errors (1-3)"
+            - "Minimal spelling errors"
+            - "Generally correct punctuation"
+        
+        - score: 50
+          label: "Basic"
+          description: "Several errors"
+          indicators:
+            - "Multiple grammar errors"
+            - "Several spelling errors"
+            - "Punctuation errors"
+        
+        - score: 25
+          label: "Below Basic"
+          description: "Frequent errors"
+          indicators:
+            - "Frequent grammar errors"
+            - "Many spelling errors"
+            - "Poor punctuation"
+      
+      auto_grading:
+        enabled: true
+        method: "pattern_matching"
+        config:
+          tools:
+            - name: "language_tool"
+              max_errors: 5
+              weight: 0.6
+            - name: "spell_checker"
+              max_errors: 3
+              weight: 0.4
+  
+  grading:
+    auto_publish: false
+    show_rubric_to_students: true
+    allow_regrade_requests: true
+    regrade_window_days: 7
+    plagiarism_check: true
+    plagiarism_threshold: 15
+  
+  feedback:
+    provide_criterion_scores: true
+    provide_level_descriptions: true
+    provide_suggestions: true
+    include_exemplar: false

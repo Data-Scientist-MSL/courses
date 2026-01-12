@@ -1,0 +1,112 @@
+# MCQ Exam Template
+
+exam:
+  id: "exam_mcq_template"
+  title: "Multiple Choice Quiz Template"
+  description: "Template for creating multiple choice exams"
+  type: "mcq_only"
+  
+  # General settings
+  duration: 60  # minutes
+  total_points: 100
+  passing_score: 70
+  
+  # Access control
+  access_control:
+    minimum_tier: "basic"
+    prerequisites: []
+    attempts_allowed: 3
+  
+  # Timing
+  timing:
+    warnings_at: [30, 10, 5, 1]  # minutes remaining
+    grace_period: 2  # minutes
+    auto_submit: true
+  
+  # Proctoring (optional for MCQ)
+  proctoring:
+    enabled: false
+    strictness: "relaxed"
+  
+  # Grading
+  grading:
+    auto_publish: true
+    show_correct_answers: true
+    show_score_breakdown: true
+  
+  # Questions
+  questions:
+    - id: "q1"
+      type: "mcq"
+      prompt: "What is the capital of France?"
+      
+      options:
+        - id: "a"
+          text: "London"
+          correct: false
+        - id: "b"
+          text: "Paris"
+          correct: true
+        - id: "c"
+          text: "Berlin"
+          correct: false
+        - id: "d"
+          text: "Madrid"
+          correct: false
+      
+      points: 5
+      randomize_options: true
+      
+    - id: "q2"
+      type: "mcq_multiple"  # Multiple correct answers
+      prompt: "Which of the following are programming languages? (Select all that apply)"
+      
+      options:
+        - id: "a"
+          text: "Python"
+          correct: true
+        - id: "b"
+          text: "HTML"
+          correct: false
+        - id: "c"
+          text: "JavaScript"
+          correct: true
+        - id: "d"
+          text: "CSS"
+          correct: false
+      
+      points: 5
+      partial_credit: true
+      scoring:
+        all_correct: 5
+        per_correct: 1.25
+        per_incorrect: -0.5
+        minimum: 0
+      
+    - id: "q3"
+      type: "mcq"
+      prompt: "In machine learning, what does 'overfitting' mean?"
+      
+      media:
+        - type: "image"
+          url: "/static/images/overfitting_diagram.png"
+          alt: "Graph showing overfitting vs underfitting"
+      
+      options:
+        - id: "a"
+          text: "Model performs well on training data but poorly on test data"
+          correct: true
+        - id: "b"
+          text: "Model performs poorly on both training and test data"
+          correct: false
+        - id: "c"
+          text: "Model performs well on both training and test data"
+          correct: false
+        - id: "d"
+          text: "Model is too simple"
+          correct: false
+      
+      points: 5
+      difficulty: "medium"
+      tags: ["machine_learning", "overfitting"]
+      learning_objective: "Understand overfitting concept"

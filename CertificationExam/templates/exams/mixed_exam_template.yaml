@@ -1,0 +1,149 @@
+# Mixed Question Type Exam Template
+
+exam:
+  id: "exam_mixed_template"
+  title: "Comprehensive Exam Template"
+  description: "Template with multiple question types"
+  type: "mixed"
+  
+  # General settings
+  duration: 180  # 3 hours
+  total_points: 100
+  passing_score: 70
+  
+  # Access control
+  access_control:
+    minimum_tier: "advanced"
+    prerequisites: ["completed_all_modules"]
+    attempts_allowed: 1
+  
+  # Proctoring
+  proctoring:
+    enabled: true
+    strictness: "strict"
+    pre_exam:
+      identity_verification: true
+      environment_scan: true
+      human_approval_required: true
+    recording:
+      webcam: true
+      screen: false
+      audio: "incident_only"
+  
+  # Grading
+  grading:
+    auto_publish: false
+    show_correct_answers: false
+    manual_review_required: true
+  
+  # Question randomization
+  randomization:
+    randomize_question_order: true
+    question_pools:
+      - pool_id: "mcq_pool"
+        select_count: 5
+        points_per_question: 2
+  
+  # Instructions
+  instructions: |
+    This is a comprehensive final exam covering all course topics.
+    
+    The exam consists of:
+    - 10 multiple choice questions (20 points)
+    - 2 coding challenges (40 points)
+    - 1 essay question (20 points)
+    - 1 project submission (20 points)
+    
+    You have 3 hours to complete the exam.
+    Ensure your webcam and microphone are enabled for proctoring.
+    
+    Good luck!
+  
+  # Questions
+  sections:
+    - section_id: "section_mcq"
+      title: "Multiple Choice Questions"
+      description: "Test your conceptual understanding"
+      questions:
+        - id: "mcq_1"
+          type: "mcq"
+          prompt: "What is the primary advantage of transformers?"
+          options:
+            - text: "Parallelizable computation"
+              correct: true
+            - text: "Lower memory"
+              correct: false
+          points: 2
+        
+        # ... more MCQ questions
+    
+    - section_id: "section_coding"
+      title: "Coding Challenges"
+      description: "Demonstrate your programming skills"
+      questions:
+        - id: "coding_1"
+          type: "coding"
+          prompt: "Implement attention mechanism"
+          language: "python"
+          starter_code: "def attention(Q, K, V):\n    pass"
+          test_cases:
+            - input: [...]
+              expected: [...]
+          points: 20
+          rubric_id: "coding_rubric"
+        
+        - id: "coding_2"
+          type: "coding"
+          prompt: "Implement BERT tokenizer"
+          language: "python"
+          points: 20
+          rubric_id: "coding_rubric"
+    
+    - section_id: "section_essay"
+      title: "Essay Question"
+      description: "Analyze and discuss"
+      questions:
+        - id: "essay_1"
+          type: "essay"
+          prompt: |
+            Discuss the ethical implications of large language models.
+            Address the following points:
+            - Bias and fairness
+            - Privacy concerns
+            - Misinformation
+            - Environmental impact
+            
+            Your essay should be 500-750 words.
+          
+          min_words: 500
+          max_words: 750
+          points: 20
+          rubric_id: "essay_rubric"
+          time_limit: 1800  # 30 minutes
+          plagiarism_check: true
+    
+    - section_id: "section_project"
+      title: "Project Submission"
+      description: "Submit your capstone project"
+      questions:
+        - id: "project_1"
+          type: "file_upload"
+          prompt: |
+            Submit your completed capstone project.
+            
+            Requirements:
+            - ZIP file containing all code and documentation
+            - README.md with instructions
+            - Results and analysis
+            
+            Maximum file size: 100 MB
+          
+          accepted_formats: [".zip", ".tar.gz"]
+          max_file_size: 100  # MB
+          required_files:
+            - "README.md"
+            - "src/*.py"
+            - "results.pdf"
+          
+          points: 20
+          rubric_id: "project_rubric"
