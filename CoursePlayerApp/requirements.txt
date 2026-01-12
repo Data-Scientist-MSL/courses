@@ -1,0 +1,46 @@
+# Core Dependencies
+streamlit>=1.30.0
+python-dotenv>=1.0.0
+
+# API and HTTP
+requests>=2.31.0
+urllib3>=2.0.0
+
+# Authentication
+PyJWT>=2.8.0
+cryptography>=41.0.0
+
+# AI/ML
+ollama>=0.1.0
+
+# Data Processing
+pandas>=2.1.0
+numpy>=1.24.0
+
+# Visualization
+plotly>=5.18.0
+
+# Database
+psycopg2-binary>=2.9.9
+SQLAlchemy>=2.0.0
+
+# Cloud Storage (Cloudflare R2/AWS S3)
+boto3>=1.28.0
+botocore>=1.31.0
+
+# Video Processing
+python-ffmpeg>=2.0.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3
+
+# Monitoring and Logging
+structlog>=23.1.0
+
+# Rate Limiting
+limits>=3.6.0
+
+# Environment Management
+pydantic>=2.4.0
+pydantic-settings>=2.0.0
