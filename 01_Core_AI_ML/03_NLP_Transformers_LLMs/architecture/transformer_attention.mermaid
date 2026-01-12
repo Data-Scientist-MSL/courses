@@ -1,0 +1,287 @@
+# Transformer Architecture Diagrams
+
+## 1. Complete Transformer Architecture
+
+```mermaid
+graph TB
+    subgraph "Input Processing"
+        A[Input Tokens] --> B[Token Embeddings]
+        C[Positional Encodings] --> D[Add]
+        B --> D
+        D --> E[Input Embeddings + Positions]
+    end
+    
+    subgraph "Encoder Stack (N=6 layers)"
+        E --> F1[Multi-Head Self-Attention]
+        F1 --> F2[Add & Norm]
+        E -.Residual.-> F2
+        F2 --> F3[Feed Forward Network]
+        F3 --> F4[Add & Norm]
+        F2 -.Residual.-> F4
+        F4 --> F5[Encoder Output]
+    end
+    
+    subgraph "Decoder Stack (N=6 layers)"
+        G[Output Tokens Shifted Right] --> H1[Masked Multi-Head Attention]
+        H1 --> H2[Add & Norm]
+        G -.Residual.-> H2
+        H2 --> H3[Cross-Attention]
+        F5 -.Encoder Output.-> H3
+        H3 --> H4[Add & Norm]
+        H2 -.Residual.-> H4
+        H4 --> H5[Feed Forward Network]
+        H5 --> H6[Add & Norm]
+        H4 -.Residual.-> H6
+    end
+    
+    H6 --> I[Linear Layer]
+    I --> J[Softmax]
+    J --> K[Output Probabilities]
+    
+    style F1 fill:#e1f5ff
+    style H1 fill:#ffe1f5
+    style H3 fill:#f5ffe1
+```
+
+## 2. Self-Attention Mechanism Detail
+
+```mermaid
+graph LR
+    subgraph "Input"
+        A[Word Embeddings<br/>seq_len × d_model]
+    end
+    
+    subgraph "Linear Projections"
+        A --> B[Query<br/>W_Q]
+        A --> C[Key<br/>W_K]
+        A --> D[Value<br/>W_V]
+    end
+    
+    subgraph "Attention Calculation"
+        B --> E[Q · K^T]
+        C --> E
+        E --> F[Scale by √d_k]
+        F --> G[Softmax]
+        G --> H[Attention Weights]
+        H --> I[Weighted Sum]
+        D --> I
+    end
+    
+    I --> J[Attention Output<br/>seq_len × d_model]
+    
+    style E fill:#ffcccc
+    style G fill:#ccffcc
+    style I fill:#ccccff
+```
+
+## 3. Multi-Head Attention
+
+```mermaid
+graph TD
+    A[Input: seq_len × d_model] --> B[Split into h heads]
+    
+    subgraph "Head 1"
+        B --> C1[Attention<br/>d_k = d_model/h]
+    end
+    
+    subgraph "Head 2"
+        B --> C2[Attention<br/>d_k = d_model/h]
+    end
+    
+    subgraph "Head 3"
+        B --> C3[Attention<br/>d_k = d_model/h]
+    end
+    
+    subgraph "Head h"
+        B --> C4[Attention<br/>d_k = d_model/h]
+    end
+    
+    C1 --> D[Concatenate Heads]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    
+    D --> E[Linear Projection]
+    E --> F[Output: seq_len × d_model]
+    
+    style C1 fill:#ff9999
+    style C2 fill:#99ff99
+    style C3 fill:#9999ff
+    style C4 fill:#ffff99
+```
+
+## 4. Attention Score Calculation
+
+```mermaid
+sequenceDiagram
+    participant Q as Query Matrix
+    participant K as Key Matrix
+    participant V as Value Matrix
+    participant S as Scores
+    participant A as Attention Weights
+    participant O as Output
+    
+    Q->>S: Dot product Q · K^T
+    K->>S: Transpose and multiply
+    S->>S: Scale by √d_k
+    S->>A: Apply Softmax
+    Note over A: Convert to probabilities<br/>(sum to 1.0)
+    A->>O: Multiply with V
+    V->>O: Weighted combination
+    Note over O: Final contextualized<br/>representation
+```
+
+## 5. Encoder vs Decoder Attention
+
+```mermaid
+graph TD
+    subgraph "Encoder: Bidirectional Attention"
+        E1[Token 1] --> EA[All Tokens]
+        E2[Token 2] --> EA
+        E3[Token 3] --> EA
+        EA --> EO[Full Context]
+    end
+    
+    subgraph "Decoder: Masked Attention"
+        D1[Token 1] --> DA1[Token 1 only]
+        D2[Token 2] --> DA2[Tokens 1-2]
+        D3[Token 3] --> DA3[Tokens 1-3]
+        DA1 --> DO[Causal Context]
+        DA2 --> DO
+        DA3 --> DO
+    end
+    
+    style EA fill:#ccffcc
+    style DO fill:#ffcccc
+```
+
+## 6. Training Data Flow
+
+```mermaid
+graph LR
+    A[Training Pair<br/>Source → Target] --> B[Encoder Input:<br/>Full Source]
+    A --> C[Decoder Input:<br/>Target Shifted Right]
+    A --> D[Decoder Output:<br/>Target]
+    
+    B --> E[Encoder Processing]
+    C --> F[Decoder Processing]
+    E --> G[Context Vector]
+    G --> F
+    
+    F --> H[Predictions]
+    H --> I[Loss Calculation]
+    D --> I
+    
+    I --> J[Backpropagation]
+    J --> K[Update Weights]
+    
+    style I fill:#ffcccc
+    style K fill:#ccffcc
+```
+
+## 7. Inference (Generation) Flow
+
+```mermaid
+graph TD
+    A[Start Token] --> B[Decoder]
+    B --> C[Predict Next Token]
+    C --> D{End Token?}
+    D -->|No| E[Append to Sequence]
+    E --> B
+    D -->|Yes| F[Final Output]
+    
+    G[Encoder Output<br/>Context] -.-> B
+    
+    style C fill:#ccffcc
+    style D fill:#ffcccc
+```
+
+## 8. Positional Encoding Visualization
+
+```mermaid
+graph LR
+    subgraph "Position Encoding Formula"
+        A[Position: pos] --> B[Even dimensions:<br/>sin pos/10000^2i/d_model]
+        A --> C[Odd dimensions:<br/>cos pos/10000^2i/d_model]
+    end
+    
+    B --> D[Positional Vector]
+    C --> D
+    E[Word Embedding] --> F[+]
+    D --> F
+    F --> G[Input with Position Info]
+    
+    style D fill:#ffffcc
+    style G fill:#ccffff
+```
+
+## 9. Attention Pattern Examples
+
+```mermaid
+graph TD
+    subgraph "Sentence: The quick brown fox jumps"
+        A1[The] -.0.1.-> A1
+        A1 -.0.2.-> A2[quick]
+        A1 -.0.1.-> A3[brown]
+        A1 -.0.5.-> A4[fox]
+        A1 -.0.1.-> A5[jumps]
+        
+        A4 -.0.3.-> A2
+        A4 -.0.4.-> A3
+        A4 -.0.2.-> A5
+    end
+    
+    Note1[Adjectives attend<br/>to their nouns]
+    Note2[Articles attend<br/>to main nouns]
+    
+    style A4 fill:#ffcccc
+    style A2 fill:#ccffcc
+    style A3 fill:#ccffcc
+```
+
+## 10. Transformer vs RNN Comparison
+
+```mermaid
+graph TD
+    subgraph "RNN: Sequential"
+        R1[Word 1] --> R2[Hidden State 1]
+        R2 --> R3[Word 2] --> R4[Hidden State 2]
+        R4 --> R5[Word 3] --> R6[Hidden State 3]
+        R6 --> R7[Output]
+    end
+    
+    subgraph "Transformer: Parallel"
+        T1[Word 1] --> TA[Self-Attention]
+        T2[Word 2] --> TA
+        T3[Word 3] --> TA
+        TA --> TO[Output All at Once]
+    end
+    
+    style R2 fill:#ffcccc
+    style R4 fill:#ffcccc
+    style R6 fill:#ffcccc
+    style TA fill:#ccffcc
+```
+
+---
+
+## Usage in Presentations
+
+These diagrams can be rendered in:
+- **Markdown viewers** (GitHub, GitLab)
+- **Mermaid Live Editor**: https://mermaid.live
+- **VS Code** with Mermaid extension
+- **Jupyter notebooks** with `%%mermaid` magic
+
+## Interactive Exploration
+
+For hands-on exploration:
+1. Copy any diagram code
+2. Paste into [Mermaid Live Editor](https://mermaid.live)
+3. Modify and experiment!
+
+## Additional Resources
+
+- [Mermaid Documentation](https://mermaid.js.org/)
+- [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
