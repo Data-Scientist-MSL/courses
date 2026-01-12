@@ -1,0 +1,92 @@
+# Example Technical Standards - Code Execution
+
+standard:
+  id: "TECH-CODE-EXEC"
+  name: "Code Execution Standard"
+  version: "1.0.0"
+  category: "technical"
+  subcategory: "code_execution"
+  description: "Standards for ensuring all course code executes without errors"
+  last_updated: "2026-01-12"
+
+# Compliance profiles (thresholds vary by profile)
+profiles:
+  strict:
+    enabled: true
+    pass_threshold: 1.0  # 100%
+    blocking_on_failure: true
+  standard:
+    enabled: true
+    pass_threshold: 0.95  # 95%
+    blocking_on_failure: true
+  relaxed:
+    enabled: true
+    pass_threshold: 0.80  # 80%
+    blocking_on_failure: false
+
+# Individual requirements
+requirements:
+  - id: "CODE-EXEC-001"
+    name: "Jupyter notebooks execute without errors"
+    description: "All .ipynb files must execute cell-by-cell without raising exceptions"
+    severity: "critical"
+    blocking: true
+    auto_fixable: false
+    check_type: "automated"
+    
+    validation:
+      method: "execute_notebook"
+      timeout_seconds: 300
+      parameters:
+        kernel: "python3"
+        allow_errors: false
+    
+    pass_criteria:
+      - "All cells execute successfully"
+      - "No exceptions raised"
+      - "Execution completes within timeout"
+    
+    fail_criteria:
+      - "Any cell raises exception"
+      - "Execution times out"
+      - "Kernel crash"
+    
+    remediation:
+      auto_fix: false
+      suggestion: "Review stack trace, fix code error, ensure all dependencies installed"
+      documentation_url: "https://jupyter-notebook.readthedocs.io/"
+
+  - id: "CODE-EXEC-002"
+    name: "Python scripts execute without errors"
+    description: "All .py files must run without raising exceptions"
+    severity: "critical"
+    blocking: true
+    auto_fixable: false
+    check_type: "automated"
+    
+    validation:
+      method: "execute_script"
+      timeout_seconds: 120
+      parameters:
+        python_version: "3.10"
+    
+    pass_criteria:
+      - "Script exits with code 0"
+      - "No exceptions raised"
+    
+    fail_criteria:
+      - "Non-zero exit code"
+      - "Unhandled exception"
+    
+    remediation:
+      auto_fix: false
+      suggestion: "Fix syntax or runtime errors, add try-except for expected errors"
+
+related_standards:
+  - "TECH-DEP-001"
+  - "TECH-FILE-001"
+
+changelog:
+  - version: "1.0.0"
+    date: "2026-01-12"
+    changes: "Initial standard definition"
