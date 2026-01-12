@@ -1,0 +1,330 @@
+{
+  "product_id": "courses-v2-2026",
+  "product_name": "Modern Data Science & AI Curriculum 2026",
+  "version": "1.0.0",
+  "description": "Comprehensive curriculum covering modern data science, AI/ML, and production systems with a focus on practical, production-ready skills",
+  "curriculum": {
+    "tracks": [
+      {
+        "id": "modern-foundations",
+        "name": "Modern Foundations",
+        "description": "Philosophy and tooling for modern data science - establishing first principles thinking and professional development practices",
+        "sequence_order": 1,
+        "courses": [
+          {
+            "id": "philosophy-2026",
+            "code": "PHIL2026",
+            "title": "Philosophy of Modern Data Science",
+            "description": "First principles thinking, epistemology, and ethics in data science. Learn to think critically about data problems and understand the philosophical foundations of machine learning.",
+            "duration_hours": 8,
+            "tier_access": "basic",
+            "prerequisites": [],
+            "metadata": {
+              "learning_objectives": [
+                "Apply first principles thinking to data problems",
+                "Understand epistemological foundations of machine learning",
+                "Identify ethical considerations in data work",
+                "Distinguish between correlation and causation",
+                "Evaluate statistical claims critically"
+              ],
+              "topics": [
+                "First Principles Thinking",
+                "Epistemology of Data",
+                "Ethics in AI/ML",
+                "Scientific Method",
+                "Causality vs Correlation",
+                "Bias and Fairness"
+              ],
+              "difficulty": "beginner",
+              "estimated_completion_weeks": 1
+            }
+          },
+          {
+            "id": "tooling-2026",
+            "code": "TOOL2026",
+            "title": "Modern Tooling & Development Environment",
+            "description": "Python ecosystem, version control, reproducible environments, and AI-assisted development. Set up a professional data science workflow.",
+            "duration_hours": 10,
+            "tier_access": "basic",
+            "prerequisites": [],
+            "metadata": {
+              "learning_objectives": [
+                "Set up professional Python development environment",
+                "Master Git and GitHub workflows",
+                "Use Docker for reproducibility",
+                "Leverage AI coding assistants effectively",
+                "Manage dependencies with Poetry/uv",
+                "Write clean, maintainable code"
+              ],
+              "topics": [
+                "Python Setup (pyenv, virtualenv)",
+                "Git and GitHub",
+                "Docker Basics",
+                "GitHub Copilot",
+                "VS Code Configuration",
+                "Poetry/uv Package Management",
+                "Pre-commit Hooks",
+                "Code Formatting (black, ruff)"
+              ],
+              "difficulty": "beginner",
+              "estimated_completion_weeks": 1
+            }
+          },
+          {
+            "id": "data-engineering-2026",
+            "code": "DENG2026",
+            "title": "Data Engineering Fundamentals",
+            "description": "Data pipelines, storage systems, and processing frameworks. Learn to build robust, scalable data pipelines for ML workflows.",
+            "duration_hours": 12,
+            "tier_access": "basic",
+            "prerequisites": ["TOOL2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Design efficient data pipelines",
+                "Choose appropriate storage solutions",
+                "Process data at scale with modern tools",
+                "Implement data quality checks",
+                "Work with SQL and DataFrame APIs",
+                "Build ETL/ELT workflows"
+              ],
+              "topics": [
+                "SQL Fundamentals",
+                "Pandas DataFrames",
+                "Polars for Performance",
+                "DuckDB for Analytics",
+                "Data Validation (Great Expectations)",
+                "Data Pipelines (Prefect/Dagster)",
+                "Data Warehousing Concepts",
+                "Data Quality and Testing"
+              ],
+              "difficulty": "beginner",
+              "estimated_completion_weeks": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "core-ai-ml",
+        "name": "Core AI/ML",
+        "description": "Statistical learning, deep learning, and NLP with transformers - the foundation of modern machine learning",
+        "sequence_order": 2,
+        "courses": [
+          {
+            "id": "statistical-learning-2026",
+            "code": "SLML2026",
+            "title": "Statistical Learning & ML Fundamentals",
+            "description": "Classical ML algorithms, evaluation metrics, and feature engineering. Build a strong foundation in machine learning theory and practice.",
+            "duration_hours": 15,
+            "tier_access": "basic",
+            "prerequisites": ["DENG2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Implement core ML algorithms from scratch",
+                "Master model evaluation techniques",
+                "Engineer effective features",
+                "Apply bias-variance tradeoff",
+                "Understand cross-validation strategies",
+                "Debug and improve models systematically"
+              ],
+              "topics": [
+                "Linear/Logistic Regression",
+                "Decision Trees and Random Forests",
+                "Gradient Boosting (XGBoost, LightGBM)",
+                "Support Vector Machines",
+                "K-Nearest Neighbors",
+                "Clustering (K-Means, DBSCAN)",
+                "Dimensionality Reduction (PCA, t-SNE)",
+                "Feature Engineering",
+                "Cross-Validation",
+                "Metrics (Accuracy, Precision, Recall, AUC)",
+                "Scikit-learn Ecosystem"
+              ],
+              "difficulty": "intermediate",
+              "estimated_completion_weeks": 2
+            }
+          },
+          {
+            "id": "deep-learning-2026",
+            "code": "DEEP2026",
+            "title": "Deep Learning & Neural Networks",
+            "description": "Neural networks, CNNs, RNNs, and modern architectures. Learn to build and train deep learning models with PyTorch.",
+            "duration_hours": 18,
+            "tier_access": "basic",
+            "prerequisites": ["SLML2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Build neural networks with PyTorch",
+                "Understand backpropagation and optimization",
+                "Apply CNNs to computer vision tasks",
+                "Use RNNs for sequence modeling",
+                "Implement transfer learning effectively",
+                "Debug training issues (overfitting, vanishing gradients)"
+              ],
+              "topics": [
+                "PyTorch Fundamentals",
+                "Neural Network Architectures",
+                "Backpropagation and Automatic Differentiation",
+                "Optimizers (SGD, Adam, AdamW)",
+                "Convolutional Neural Networks (CNNs)",
+                "Recurrent Neural Networks (RNNs, LSTMs)",
+                "Transfer Learning",
+                "Regularization Techniques",
+                "Batch Normalization",
+                "Computer Vision Applications",
+                "Training at Scale"
+              ],
+              "difficulty": "intermediate",
+              "estimated_completion_weeks": 3
+            }
+          },
+          {
+            "id": "nlp-transformers-2026",
+            "code": "NLPT2026",
+            "title": "NLP & Transformers",
+            "description": "Natural language processing with transformer architectures. Master BERT, GPT, and other transformer models for NLP tasks.",
+            "duration_hours": 15,
+            "tier_access": "intermediate",
+            "prerequisites": ["DEEP2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Understand transformer architecture deeply",
+                "Fine-tune pre-trained models for custom tasks",
+                "Apply BERT for classification and NER",
+                "Use GPT for text generation",
+                "Evaluate language models effectively",
+                "Build production NLP pipelines"
+              ],
+              "topics": [
+                "Transformer Architecture",
+                "Attention Mechanisms",
+                "BERT and its Variants",
+                "GPT and Autoregressive Models",
+                "Hugging Face Transformers",
+                "Fine-tuning Strategies",
+                "Token Classification (NER)",
+                "Text Classification",
+                "Question Answering",
+                "Text Generation",
+                "Model Evaluation for NLP",
+                "Tokenization Strategies"
+              ],
+              "difficulty": "advanced",
+              "estimated_completion_weeks": 2
+            }
+          },
+          {
+            "id": "generative-ai-2026",
+            "code": "GENA2026",
+            "title": "Generative AI & LLM Applications",
+            "description": "Large language models, prompt engineering, RAG, and AI agents. Build practical applications with LLMs.",
+            "duration_hours": 14,
+            "tier_access": "intermediate",
+            "prerequisites": ["NLPT2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Master prompt engineering techniques",
+                "Build RAG (Retrieval-Augmented Generation) applications",
+                "Implement AI agents with tool use",
+                "Fine-tune LLMs for custom tasks",
+                "Evaluate LLM outputs objectively",
+                "Deploy LLM applications at scale"
+              ],
+              "topics": [
+                "LLM Fundamentals (GPT-4, Claude, Gemini)",
+                "Prompt Engineering Best Practices",
+                "Few-Shot and Zero-Shot Learning",
+                "Retrieval-Augmented Generation (RAG)",
+                "Vector Databases (Pinecone, Weaviate)",
+                "LangChain Framework",
+                "AI Agents and Tool Use",
+                "Function Calling",
+                "LLM Fine-tuning (LoRA, QLoRA)",
+                "LLM Evaluation Metrics",
+                "Cost Optimization Strategies"
+              ],
+              "difficulty": "advanced",
+              "estimated_completion_weeks": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": "production",
+        "name": "Production",
+        "description": "MLOps and AI ethics for production systems - taking models from notebook to production",
+        "sequence_order": 3,
+        "courses": [
+          {
+            "id": "mlops-2026",
+            "code": "MLOP2026",
+            "title": "MLOps & Production ML Systems",
+            "description": "Deploying, monitoring, and maintaining ML systems in production. Learn industry best practices for ML engineering.",
+            "duration_hours": 16,
+            "tier_access": "intermediate",
+            "prerequisites": ["DEEP2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Deploy ML models to production",
+                "Implement monitoring and alerting for ML systems",
+                "Build CI/CD pipelines for ML",
+                "Manage model versions and experiments",
+                "Handle model drift and retraining",
+                "Design scalable inference systems"
+              ],
+              "topics": [
+                "MLflow for Experiment Tracking",
+                "Model Registry and Versioning",
+                "Docker for ML",
+                "FastAPI for Model Serving",
+                "Kubernetes Basics for ML",
+                "Monitoring and Observability",
+                "A/B Testing for Models",
+                "Feature Stores",
+                "Model Performance Monitoring",
+                "CI/CD for ML (GitHub Actions)",
+                "Infrastructure as Code (Terraform)",
+                "Cost Optimization"
+              ],
+              "difficulty": "advanced",
+              "estimated_completion_weeks": 2
+            }
+          },
+          {
+            "id": "ai-ethics-2026",
+            "code": "ETHI2026",
+            "title": "AI Ethics & Responsible AI",
+            "description": "Fairness, accountability, transparency, and societal impact of AI. Build AI systems responsibly.",
+            "duration_hours": 10,
+            "tier_access": "advanced",
+            "prerequisites": ["SLML2026"],
+            "metadata": {
+              "learning_objectives": [
+                "Identify and mitigate bias in AI systems",
+                "Apply fairness metrics and constraints",
+                "Ensure model transparency and explainability",
+                "Consider societal impact of AI decisions",
+                "Implement responsible AI practices",
+                "Navigate AI governance and regulation"
+              ],
+              "topics": [
+                "Fairness Definitions and Metrics",
+                "Bias in Data and Models",
+                "Bias Mitigation Techniques",
+                "Explainability (SHAP, LIME)",
+                "Model Interpretability",
+                "Privacy-Preserving ML",
+                "Differential Privacy",
+                "AI Governance Frameworks",
+                "Regulatory Landscape (GDPR, AI Act)",
+                "Environmental Impact of AI",
+                "Ethical Decision-Making"
+              ],
+              "difficulty": "advanced",
+              "estimated_completion_weeks": 1
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
