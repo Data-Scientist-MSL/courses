@@ -4,3 +4,6 @@
 .Rproj.user
 .RData
 
+__pycache__/
+*.pyc
+*.pyo
