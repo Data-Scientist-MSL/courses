@@ -1,0 +1,302 @@
+{
+  "coursesgtm": {
+    "api_url": "http://localhost:8000",
+    "api_version": "v1",
+    "timeout_seconds": 30,
+    "retry_attempts": 3,
+    "retry_delay_seconds": 1,
+    "retry_backoff_multiplier": 2,
+    "endpoints": {
+      "license": {
+        "validate": "/api/v1/license/validate",
+        "features": "/api/v1/license/features",
+        "refresh": "/api/v1/license/refresh",
+        "activate": "/api/v1/license/activate"
+      },
+      "courses": {
+        "list": "/api/v1/courses",
+        "get": "/api/v1/courses/{course_id}",
+        "check_access": "/api/v1/courses/{course_id}/check-access",
+        "enroll": "/api/v1/courses/{course_id}/enroll"
+      },
+      "lessons": {
+        "get": "/api/v1/lessons/{lesson_id}",
+        "list_by_course": "/api/v1/courses/{course_id}/lessons"
+      },
+      "videos": {
+        "metadata": "/api/v1/videos/{video_id}/metadata",
+        "stream_url": "/api/v1/videos/{video_id}/stream-url",
+        "transcript": "/api/v1/videos/{video_id}/transcript",
+        "download": "/api/v1/videos/{video_id}/download",
+        "notes": "/api/v1/videos/{video_id}/notes"
+      },
+      "progress": {
+        "get": "/api/v1/progress/{course_id}",
+        "update": "/api/v1/progress/{course_id}/update",
+        "analytics": "/api/v1/analytics/{course_id}"
+      },
+      "rewards": {
+        "achievements": "/api/v1/rewards/achievements",
+        "check": "/api/v1/rewards/check",
+        "leaderboard": "/api/v1/rewards/leaderboard"
+      },
+      "ai_tutor": {
+        "quota": "/api/v1/ai-tutor/quota",
+        "decrement": "/api/v1/ai-tutor/decrement",
+        "search_context": "/api/v1/ai-tutor/{course_id}/search-context",
+        "save_chat": "/api/v1/ai-tutor/save-chat"
+      },
+      "quizzes": {
+        "get": "/api/v1/quizzes/{quiz_id}",
+        "submit": "/api/v1/quizzes/{quiz_id}/submit",
+        "run_code_tests": "/api/v1/quizzes/run-code-tests"
+      },
+      "certificates": {
+        "list": "/api/v1/certificates",
+        "generate": "/api/v1/certificates/generate/{course_id}",
+        "verify": "/api/v1/certificates/{certificate_id}/verify"
+      },
+      "code_review": {
+        "submit": "/api/v1/code-review/{course_id}/submit",
+        "status": "/api/v1/code-review/submissions/{submission_id}",
+        "feedback": "/api/v1/code-review/submissions/{submission_id}/feedback"
+      },
+      "datasets": {
+        "list": "/api/v1/datasets",
+        "get": "/api/v1/datasets/{dataset_id}",
+        "download": "/api/v1/datasets/{dataset_id}/download"
+      },
+      "subscription": {
+        "status": "/api/v1/subscription/status",
+        "upgrade": "/api/v1/subscription/upgrade",
+        "cancel": "/api/v1/subscription/cancel"
+      }
+    },
+    "auth": {
+      "type": "bearer_token",
+      "header_name": "Authorization",
+      "header_prefix": "Bearer",
+      "api_key_env": "COURSESGTM_API_KEY"
+    },
+    "caching": {
+      "enabled": true,
+      "ttl_seconds": {
+        "license": 300,
+        "courses": 600,
+        "videos": 600,
+        "quizzes": 600
+      }
+    }
+  },
+  "ollama": {
+    "base_url": "http://localhost:11434",
+    "timeout_seconds": 60,
+    "retry_attempts": 2,
+    "endpoints": {
+      "chat": "/api/chat",
+      "generate": "/api/generate",
+      "embeddings": "/api/embeddings",
+      "tags": "/api/tags",
+      "pull": "/api/pull"
+    },
+    "models": {
+      "intermediate": {
+        "name": "llama3.2:3b",
+        "context_window": 4096,
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40
+      },
+      "advanced": {
+        "name": "llama3.1:8b",
+        "context_window": 8192,
+        "temperature": 0.7,
+        "top_p": 0.9,
+        "top_k": 40
+      }
+    },
+    "fallback": {
+      "enabled": true,
+      "fallback_model": "llama3.2:3b",
+      "cache_responses": true
+    }
+  },
+  "lemonsqueezy": {
+    "store_id": "your_store_id",
+    "api_url": "https://api.lemonsqueezy.com/v1",
+    "webhook_url": "/api/webhooks/lemonsqueezy",
+    "webhook_secret_env": "LEMONSQUEEZY_WEBHOOK_SECRET",
+    "product_ids": {
+      "intermediate": "123456",
+      "advanced": "123457"
+    },
+    "checkout_urls": {
+      "intermediate": "https://your-store.lemonsqueezy.com/checkout/buy/intermediate",
+      "advanced": "https://your-store.lemonsqueezy.com/checkout/buy/advanced"
+    },
+    "billing_portal_url": "https://your-store.lemonsqueezy.com/billing",
+    "webhook_events": [
+      "order_created",
+      "subscription_created",
+      "subscription_updated",
+      "subscription_cancelled",
+      "subscription_resumed",
+      "subscription_expired",
+      "subscription_payment_success",
+      "subscription_payment_failed"
+    ]
+  },
+  "keygen": {
+    "account_id": "your_account_id",
+    "api_url": "https://api.keygen.sh/v1",
+    "api_key_env": "KEYGEN_API_KEY",
+    "product_id": "your_product_id",
+    "endpoints": {
+      "validate": "/accounts/{account_id}/licenses/actions/validate-key",
+      "activate": "/accounts/{account_id}/licenses/actions/activate",
+      "deactivate": "/accounts/{account_id}/licenses/actions/deactivate",
+      "check_in": "/accounts/{account_id}/machines/actions/check-in"
+    },
+    "offline_validation": {
+      "enabled": true,
+      "public_key_path": "/keys/keygen_public.pem",
+      "max_offline_days": 30
+    }
+  },
+  "storage": {
+    "provider": "s3",
+    "s3": {
+      "bucket_name": "courseplayerapp-content",
+      "region": "us-east-1",
+      "access_key_env": "AWS_ACCESS_KEY_ID",
+      "secret_key_env": "AWS_SECRET_ACCESS_KEY",
+      "endpoint_url": null,
+      "use_accelerate": false,
+      "paths": {
+        "videos": "videos/",
+        "slides": "slides/",
+        "labs": "labs/",
+        "datasets": "datasets/",
+        "certificates": "certificates/",
+        "user_uploads": "uploads/"
+      }
+    },
+    "cdn": {
+      "enabled": true,
+      "base_url": "https://cdn.example.com",
+      "cloudfront_distribution_id": "your_distribution_id"
+    },
+    "local": {
+      "enabled": false,
+      "base_path": "/var/courseplayerapp/content"
+    }
+  },
+  "database": {
+    "provider": "postgresql",
+    "url_env": "DATABASE_URL",
+    "pool_size": 10,
+    "max_overflow": 20,
+    "pool_timeout": 30,
+    "pool_recycle": 3600,
+    "echo": false,
+    "sqlite": {
+      "enabled": false,
+      "path": "data/courseplayerapp.db"
+    }
+  },
+  "redis": {
+    "url_env": "REDIS_URL",
+    "default_url": "redis://localhost:6379",
+    "db": 0,
+    "max_connections": 50,
+    "socket_timeout": 5,
+    "socket_connect_timeout": 5,
+    "decode_responses": true,
+    "key_prefix": "courseplayerapp:",
+    "session_ttl_seconds": 3600
+  },
+  "chromadb": {
+    "host": "localhost",
+    "port": 8000,
+    "persist_directory": "./data/chroma",
+    "collection_name_prefix": "course_",
+    "embedding_model": "llama3.2:3b",
+    "distance_metric": "cosine"
+  },
+  "email": {
+    "provider": "smtp",
+    "smtp": {
+      "host": "smtp.example.com",
+      "port": 587,
+      "username_env": "SMTP_USERNAME",
+      "password_env": "SMTP_PASSWORD",
+      "use_tls": true,
+      "from_email": "noreply@gai-observe.online",
+      "from_name": "GAI-Observe Academy"
+    },
+    "sendgrid": {
+      "enabled": false,
+      "api_key_env": "SENDGRID_API_KEY",
+      "from_email": "noreply@gai-observe.online"
+    },
+    "templates": {
+      "welcome": "templates/email/welcome.html",
+      "certificate": "templates/email/certificate.html",
+      "upgrade": "templates/email/upgrade.html"
+    }
+  },
+  "monitoring": {
+    "sentry": {
+      "enabled": false,
+      "dsn_env": "SENTRY_DSN",
+      "traces_sample_rate": 0.1,
+      "environment": "production"
+    },
+    "prometheus": {
+      "enabled": false,
+      "port": 9090,
+      "metrics_path": "/metrics"
+    },
+    "logging": {
+      "level": "INFO",
+      "format": "json",
+      "file_path": "logs/courseplayerapp.log",
+      "max_bytes": 10485760,
+      "backup_count": 5
+    }
+  },
+  "rate_limiting": {
+    "enabled": true,
+    "redis_based": true,
+    "limits": {
+      "api_calls_per_minute": 60,
+      "video_streams_per_hour": 100,
+      "ai_questions_per_hour": 20,
+      "downloads_per_day": 50
+    }
+  },
+  "security": {
+    "cors": {
+      "enabled": true,
+      "allowed_origins": ["http://localhost:3000", "https://learn.example.com"],
+      "allowed_methods": ["GET", "POST", "PUT", "DELETE"],
+      "allowed_headers": ["Content-Type", "Authorization"],
+      "allow_credentials": true
+    },
+    "csrf": {
+      "enabled": true,
+      "cookie_name": "csrftoken",
+      "header_name": "X-CSRF-Token"
+    },
+    "content_security_policy": {
+      "enabled": true,
+      "policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+    }
+  },
+  "feature_flags_remote": {
+    "enabled": false,
+    "provider": "launchdarkly",
+    "sdk_key_env": "LAUNCHDARKLY_SDK_KEY",
+    "refresh_interval_seconds": 60
+  }
+}
