@@ -1,0 +1,275 @@
+{
+  "product_id": "courses-v2-2026",
+  "tiers": [
+    {
+      "id": "tier-basic",
+      "name": "Basic",
+      "level": 1,
+      "description": "Foundations and core ML - Perfect for getting started with modern data science",
+      "pricing": {
+        "one_time": 99,
+        "expiry_months": 12,
+        "currency": "USD"
+      },
+      "access": {
+        "courses": {
+          "included": [
+            "PHIL2026",
+            "TOOL2026",
+            "DENG2026",
+            "SLML2026",
+            "DEEP2026"
+          ],
+          "description": "Access to all Modern Foundations courses (3) plus Statistical Learning and Deep Learning"
+        },
+        "features": {
+          "community_access": true,
+          "download_resources": true,
+          "certificate": true,
+          "course_forums": true,
+          "email_support": true,
+          "priority_support": false,
+          "office_hours": false,
+          "1on1_mentoring": false,
+          "job_board_access": false,
+          "early_access_beta": false
+        }
+      },
+      "unlock_rewards": [
+        {
+          "trigger": "license_issued",
+          "reward_type": "achievement",
+          "value": {
+            "name": "Welcome to CoursesGTM",
+            "icon": "👋",
+            "description": "Started your learning journey with the Basic tier"
+          }
+        },
+        {
+          "trigger": "first_course_complete",
+          "reward_type": "achievement",
+          "value": {
+            "name": "First Steps",
+            "icon": "🎓",
+            "description": "Completed your first course"
+          }
+        },
+        {
+          "trigger": "all_courses_complete",
+          "reward_type": "discount",
+          "value": {
+            "discount_percentage": 20,
+            "applies_to": "intermediate_upgrade",
+            "expires_days": 30,
+            "description": "20% off upgrade to Intermediate tier for completing all Basic courses"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tier-intermediate",
+      "name": "Intermediate",
+      "level": 2,
+      "description": "Everything in Basic + Advanced NLP, GenAI, and MLOps - Take your skills to production level",
+      "pricing": {
+        "one_time": 199,
+        "expiry_months": 12,
+        "currency": "USD"
+      },
+      "access": {
+        "courses": {
+          "included": [
+            "PHIL2026",
+            "TOOL2026",
+            "DENG2026",
+            "SLML2026",
+            "DEEP2026",
+            "NLPT2026",
+            "GENA2026",
+            "MLOP2026"
+          ],
+          "description": "All Basic courses plus NLP & Transformers, Generative AI & LLM Applications, and MLOps"
+        },
+        "features": {
+          "community_access": true,
+          "download_resources": true,
+          "certificate": true,
+          "course_forums": true,
+          "email_support": true,
+          "priority_support": true,
+          "office_hours": true,
+          "1on1_mentoring": false,
+          "job_board_access": true,
+          "early_access_beta": false,
+          "slack_community": true,
+          "monthly_webinars": true
+        }
+      },
+      "unlock_rewards": [
+        {
+          "trigger": "license_issued",
+          "reward_type": "achievement",
+          "value": {
+            "name": "Serious Learner",
+            "icon": "📚",
+            "description": "Invested in the Intermediate tier - committed to mastery"
+          }
+        },
+        {
+          "trigger": "first_course_complete",
+          "reward_type": "feature_unlock",
+          "value": {
+            "feature": "priority_support",
+            "description": "Unlocked priority email support"
+          }
+        },
+        {
+          "trigger": "all_courses_complete",
+          "reward_type": "feature_unlock",
+          "value": {
+            "feature": "early_access_beta",
+            "duration_months": 6,
+            "description": "6 months of early access to beta courses and features"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tier-advanced",
+      "name": "Advanced",
+      "level": 3,
+      "description": "Complete access to all courses and premium features - The ultimate learning experience",
+      "pricing": {
+        "one_time": 299,
+        "expiry_months": 12,
+        "currency": "USD"
+      },
+      "access": {
+        "courses": {
+          "included": [
+            "PHIL2026",
+            "TOOL2026",
+            "DENG2026",
+            "SLML2026",
+            "DEEP2026",
+            "NLPT2026",
+            "GENA2026",
+            "MLOP2026",
+            "ETHI2026"
+          ],
+          "description": "Complete access to all 9 courses including AI Ethics & Responsible AI"
+        },
+        "features": {
+          "community_access": true,
+          "download_resources": true,
+          "certificate": true,
+          "course_forums": true,
+          "email_support": true,
+          "priority_support": true,
+          "office_hours": true,
+          "1on1_mentoring": true,
+          "job_board_access": true,
+          "early_access_beta": true,
+          "slack_community": true,
+          "monthly_webinars": true,
+          "quarterly_mentoring_sessions": 4,
+          "code_review_credits": 5,
+          "resume_review": true,
+          "career_guidance": true
+        }
+      },
+      "unlock_rewards": [
+        {
+          "trigger": "license_issued",
+          "reward_type": "achievement",
+          "value": {
+            "name": "Elite Learner",
+            "icon": "🏆",
+            "description": "Unlocked the complete curriculum - ready to master it all"
+          }
+        },
+        {
+          "trigger": "first_course_complete",
+          "reward_type": "achievement",
+          "value": {
+            "name": "Advanced Journey Begins",
+            "icon": "🚀",
+            "description": "Started your path to becoming a data science expert"
+          }
+        },
+        {
+          "trigger": "all_courses_complete",
+          "reward_type": "achievement",
+          "value": {
+            "name": "Master of Data Science",
+            "icon": "🎖️",
+            "description": "Completed the entire curriculum - you're a certified expert!",
+            "special_recognition": true,
+            "linkedin_badge": true
+          }
+        },
+        {
+          "trigger": "all_courses_complete",
+          "reward_type": "discount",
+          "value": {
+            "discount_percentage": 50,
+            "applies_to": "renewal",
+            "expires_days": 90,
+            "description": "50% off your next year renewal for completing all courses"
+          }
+        }
+      ]
+    }
+  ],
+  "tier_comparison": {
+    "basic_vs_intermediate": {
+      "additional_courses": 3,
+      "additional_features": [
+        "priority_support",
+        "office_hours",
+        "job_board_access",
+        "slack_community",
+        "monthly_webinars"
+      ],
+      "price_difference": 100,
+      "value_proposition": "Add NLP, GenAI, and MLOps courses plus premium support"
+    },
+    "intermediate_vs_advanced": {
+      "additional_courses": 1,
+      "additional_features": [
+        "1on1_mentoring",
+        "early_access_beta",
+        "code_review_credits",
+        "resume_review",
+        "career_guidance"
+      ],
+      "price_difference": 100,
+      "value_proposition": "Complete curriculum plus personalized mentoring and career support"
+    },
+    "basic_vs_advanced": {
+      "additional_courses": 4,
+      "additional_features": [
+        "priority_support",
+        "office_hours",
+        "1on1_mentoring",
+        "job_board_access",
+        "early_access_beta",
+        "slack_community",
+        "monthly_webinars",
+        "code_review_credits",
+        "resume_review",
+        "career_guidance"
+      ],
+      "price_difference": 200,
+      "value_proposition": "Complete access with all premium features and personalized support",
+      "best_value": true
+    }
+  },
+  "recommended_tier_by_goal": {
+    "learn_fundamentals": "tier-basic",
+    "build_ml_career": "tier-intermediate",
+    "become_expert": "tier-advanced",
+    "production_ml": "tier-intermediate",
+    "ai_ethics_focus": "tier-advanced"
+  }
+}

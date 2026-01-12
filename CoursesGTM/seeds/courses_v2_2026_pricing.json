@@ -1,0 +1,300 @@
+{
+  "product_id": "courses-v2-2026",
+  "version": "1.0.0",
+  "upgrade_paths": [
+    {
+      "from_tier": "tier-basic",
+      "to_tier": "tier-intermediate",
+      "pricing_model": "prorated",
+      "description": "Pay the difference between tiers, prorated by remaining license time",
+      "calculation_method": "((new_tier_price - old_tier_price) * days_remaining / 365)",
+      "example": {
+        "scenario": "Upgrade after 6 months with 6 months remaining",
+        "old_tier_price": 99,
+        "new_tier_price": 199,
+        "days_remaining": 183,
+        "calculated_price": 50,
+        "explanation": "((199 - 99) * 183 / 365) = $50"
+      }
+    },
+    {
+      "from_tier": "tier-basic",
+      "to_tier": "tier-advanced",
+      "pricing_model": "prorated",
+      "description": "Pay the difference between tiers, prorated by remaining license time",
+      "calculation_method": "((new_tier_price - old_tier_price) * days_remaining / 365)",
+      "example": {
+        "scenario": "Upgrade after 3 months with 9 months remaining",
+        "old_tier_price": 99,
+        "new_tier_price": 299,
+        "days_remaining": 274,
+        "calculated_price": 150,
+        "explanation": "((299 - 99) * 274 / 365) = $150"
+      }
+    },
+    {
+      "from_tier": "tier-intermediate",
+      "to_tier": "tier-advanced",
+      "pricing_model": "prorated",
+      "description": "Pay the difference between tiers, prorated by remaining license time",
+      "calculation_method": "((new_tier_price - old_tier_price) * days_remaining / 365)",
+      "example": {
+        "scenario": "Upgrade after 4 months with 8 months remaining",
+        "old_tier_price": 199,
+        "new_tier_price": 299,
+        "days_remaining": 243,
+        "calculated_price": 67,
+        "explanation": "((299 - 199) * 243 / 365) = $67"
+      }
+    }
+  ],
+  "downgrade_policy": {
+    "allowed": false,
+    "reason": "Downgrades are not permitted. Users maintain their current tier until expiration, then can purchase a lower tier.",
+    "alternative": "Let current license expire, then purchase lower tier at full price"
+  },
+  "renewal_policy": {
+    "pricing_model": "same_price",
+    "description": "Renewals maintain original purchase price (grandfathered pricing)",
+    "renewal_discount_percentage": 0,
+    "grace_period_days": 7,
+    "grace_period_description": "Access continues for 7 days after expiration to allow time for renewal",
+    "early_renewal_incentive": {
+      "enabled": true,
+      "days_before_expiry": 30,
+      "discount_percentage": 10,
+      "description": "Renew 30+ days early and save 10%"
+    },
+    "examples": [
+      {
+        "scenario": "Basic tier purchased at $99, renewing at normal time",
+        "renewal_price": 99,
+        "current_market_price": 99,
+        "savings": 0
+      },
+      {
+        "scenario": "Basic tier purchased at $99, renewing 45 days early",
+        "renewal_price": 89,
+        "current_market_price": 99,
+        "discount_applied": "early_renewal_incentive",
+        "savings": 10
+      },
+      {
+        "scenario": "Intermediate tier purchased during promotion at $159, renewing at normal time",
+        "original_purchase_price": 159,
+        "renewal_price": 159,
+        "current_market_price": 199,
+        "grandfathered": true,
+        "savings": 40
+      }
+    ]
+  },
+  "promotions": [
+    {
+      "code": "LAUNCH2026",
+      "name": "Launch Promotion",
+      "discount_type": "percentage",
+      "value": 20,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate", "tier-advanced"],
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": "2026-01-31T23:59:59Z",
+      "max_uses": 100,
+      "max_uses_per_user": 1,
+      "description": "Launch promotion - 20% off all tiers for the first 100 customers",
+      "terms": "Valid for new purchases only. Cannot be combined with other offers."
+    },
+    {
+      "code": "UPGRADE50",
+      "name": "Upgrade Promotion",
+      "discount_type": "percentage",
+      "value": 50,
+      "applies_to_tiers": ["tier-intermediate", "tier-advanced"],
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "max_uses": null,
+      "max_uses_per_user": 1,
+      "only_for_upgrades": true,
+      "description": "50% off upgrades for existing Basic tier users",
+      "terms": "Valid for upgrades only. Existing Basic tier license required."
+    },
+    {
+      "code": "EARLYBIRD",
+      "name": "Early Bird Special",
+      "discount_type": "percentage",
+      "value": 30,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate", "tier-advanced"],
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": "2026-01-15T23:59:59Z",
+      "max_uses": 50,
+      "max_uses_per_user": 1,
+      "description": "Early bird special - 30% off all tiers for first 2 weeks",
+      "terms": "Valid for new purchases only. Limited to first 50 users."
+    },
+    {
+      "code": "STUDENT20",
+      "name": "Student Discount",
+      "discount_type": "percentage",
+      "value": 20,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate"],
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "max_uses": null,
+      "max_uses_per_user": 1,
+      "requires_verification": true,
+      "verification_method": "student_email",
+      "description": "20% off for students with valid .edu email address",
+      "terms": "Valid student email required. Not applicable to Advanced tier."
+    }
+  ],
+  "bundle_offers": [
+    {
+      "id": "basic-annual-2x",
+      "name": "2-Year Basic Bundle",
+      "description": "Purchase 2 years of Basic tier at once and save 15%",
+      "tier_id": "tier-basic",
+      "duration_months": 24,
+      "regular_price": 198,
+      "bundle_price": 168,
+      "savings": 30,
+      "savings_percentage": 15
+    },
+    {
+      "id": "team-5-basic",
+      "name": "Team Basic (5 licenses)",
+      "description": "5 Basic tier licenses for teams - 25% off per seat",
+      "tier_id": "tier-basic",
+      "quantity": 5,
+      "duration_months": 12,
+      "regular_price": 495,
+      "bundle_price": 371,
+      "savings": 124,
+      "savings_percentage": 25,
+      "requires_organization": true
+    }
+  ],
+  "pricing_rules": {
+    "currency": "USD",
+    "tax_handling": "exclusive",
+    "tax_note": "Prices shown are exclusive of applicable taxes (VAT, sales tax, etc.)",
+    "refund_policy": {
+      "window_days": 30,
+      "description": "Full refund within 30 days of purchase, no questions asked",
+      "prorated_refund": false,
+      "license_action_on_refund": "revoke"
+    },
+    "payment_methods": [
+      "credit_card",
+      "debit_card",
+      "paypal"
+    ],
+    "supported_currencies": ["USD"],
+    "future_currencies": ["EUR", "GBP", "INR"],
+    "minimum_upgrade_interval_days": 1,
+    "maximum_concurrent_licenses_per_user": 1,
+    "license_transfer": {
+      "allowed": false,
+      "reason": "Licenses are non-transferable and tied to the purchasing user"
+    }
+  },
+  "upgrade_incentives": {
+    "completion_bonus": {
+      "trigger": "complete_all_basic_courses",
+      "reward": {
+        "type": "discount",
+        "discount_percentage": 20,
+        "applies_to": "intermediate_upgrade",
+        "expires_days": 30
+      },
+      "description": "Complete all Basic tier courses and get 20% off upgrade to Intermediate"
+    },
+    "streak_bonus": {
+      "trigger": "30_day_learning_streak",
+      "reward": {
+        "type": "discount",
+        "discount_percentage": 15,
+        "applies_to": "any_upgrade",
+        "expires_days": 60
+      },
+      "description": "Maintain a 30-day learning streak and get 15% off any upgrade"
+    },
+    "referral_bonus": {
+      "trigger": "refer_3_users",
+      "reward": {
+        "type": "discount",
+        "discount_percentage": 25,
+        "applies_to": "any_upgrade",
+        "expires_days": 90
+      },
+      "description": "Refer 3 friends who purchase and get 25% off your next upgrade"
+    }
+  },
+  "seasonal_pricing": {
+    "black_friday": {
+      "name": "Black Friday Sale",
+      "discount_percentage": 40,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate", "tier-advanced"],
+      "typical_dates": "Last Friday of November",
+      "duration_days": 4
+    },
+    "new_year": {
+      "name": "New Year New Skills",
+      "discount_percentage": 30,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate", "tier-advanced"],
+      "typical_dates": "January 1-15",
+      "duration_days": 15
+    },
+    "summer_sale": {
+      "name": "Summer Learning Sale",
+      "discount_percentage": 25,
+      "applies_to_tiers": ["tier-basic", "tier-intermediate"],
+      "typical_dates": "July 1-31",
+      "duration_days": 31
+    }
+  },
+  "ab_testing": {
+    "enabled": true,
+    "experiments": [
+      {
+        "id": "exp-pricing-v1",
+        "name": "Basic Tier Price Point Test",
+        "description": "Test $99 vs $79 for Basic tier",
+        "variants": [
+          {
+            "id": "control",
+            "tier_id": "tier-basic",
+            "price": 99,
+            "allocation": 50
+          },
+          {
+            "id": "variant-a",
+            "tier_id": "tier-basic",
+            "price": 79,
+            "allocation": 50
+          }
+        ],
+        "status": "draft",
+        "metrics": ["conversion_rate", "revenue_per_user", "upgrade_rate"]
+      }
+    ]
+  },
+  "price_history": [
+    {
+      "tier_id": "tier-basic",
+      "price": 99,
+      "effective_from": "2026-01-01",
+      "note": "Initial launch pricing"
+    },
+    {
+      "tier_id": "tier-intermediate",
+      "price": 199,
+      "effective_from": "2026-01-01",
+      "note": "Initial launch pricing"
+    },
+    {
+      "tier_id": "tier-advanced",
+      "price": 299,
+      "effective_from": "2026-01-01",
+      "note": "Initial launch pricing"
+    }
+  ]
+}
