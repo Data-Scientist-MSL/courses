@@ -1,0 +1,58 @@
+# Core Framework
+streamlit==1.31.0
+fastapi==0.109.1  # Updated: Fixed ReDoS vulnerability (CVE-2024-XXXX)
+uvicorn[standard]==0.27.0
+
+# AI/ML Libraries
+langchain==0.1.5
+langchain-community==0.3.27  # Updated: Fixed XXE, SSRF, and pickle deserialization vulnerabilities
+chromadb==0.4.22
+transformers==4.48.0  # Updated: Fixed deserialization vulnerabilities
+torch==2.6.0  # Updated: Fixed heap buffer overflow, use-after-free, and RCE vulnerabilities
+sentence-transformers==2.3.1
+accelerate==0.26.1
+peft==0.8.2
+bitsandbytes==0.42.0
+
+# Data Processing
+pandas==2.2.0
+numpy==1.26.3
+scikit-learn==1.4.0
+plotly==5.18.0
+matplotlib==3.8.2
+seaborn==0.13.1
+
+# Database & Caching
+redis==5.0.1
+sqlalchemy==2.0.25
+
+# Notebook Support
+jupyterlab==4.2.5  # Updated: Fixed HTML injection and DOM clobbering vulnerabilities
+notebook==7.2.2  # Updated: Fixed HTML injection and DOM clobbering vulnerabilities
+ipywidgets==8.1.1
+
+# Data Profiling
+# ydata-profiling==4.6.4  # REMOVED: No patch available for XSS and unsafe deserialization vulnerabilities
+# Alternative: Use pandas-profiling or manual profiling with pandas
+
+# Utilities
+requests==2.31.0
+python-dotenv==1.0.0
+pyyaml==6.0.1
+python-multipart==0.0.18  # Updated: Fixed DoS and ReDoS vulnerabilities
+aiofiles==23.2.1
+
+# Code Quality
+black==24.1.1
+pylint==3.0.3
+mypy==1.8.0
+
+# Mermaid/Diagram Support
+mermaid-py==0.3.1
+
+# HTTP Client for OLLAMA
+httpx==0.26.0
+
+# Additional ML Tools
+datasets==2.16.1
+evaluate==0.4.1

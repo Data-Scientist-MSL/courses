@@ -1,0 +1,39 @@
+sequenceDiagram
+    participant User
+    participant API as API Gateway
+    participant Tokenizer
+    participant Model as LLM Model
+    participant Sampler as Token Sampler
+    participant Decoder as Detokenizer
+    
+    User->>API: Input prompt
+    API->>Tokenizer: Encode text
+    Tokenizer->>Tokenizer: Convert to token IDs
+    Tokenizer-->>API: Token IDs [1, 234, 567, ...]
+    
+    API->>Model: Forward pass
+    
+    loop Token Generation
+        Model->>Model: Self-attention
+        Model->>Model: Feed-forward
+        Model->>Model: Layer norm
+        Model-->>Sampler: Logits (vocab size)
+        
+        Sampler->>Sampler: Apply temperature
+        Sampler->>Sampler: Top-k filtering
+        Sampler->>Sampler: Top-p (nucleus) sampling
+        Sampler-->>Model: Next token ID
+        
+        alt Stop token generated
+            Model->>Decoder: Complete sequence
+        else Continue generation
+            Model->>Model: Append token, continue
+        end
+    end
+    
+    Decoder->>Decoder: Convert IDs to text
+    Decoder-->>API: Generated text
+    API-->>User: Response
+    
+    Note over Model,Sampler: KV-Cache optimization:<br/>Reuse past key-values
+    Note over Sampler: Sampling params:<br/>temp=0.7, top_k=50,<br/>top_p=0.9
