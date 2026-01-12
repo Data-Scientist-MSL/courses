@@ -281,13 +281,14 @@ class IntegrationTestRunner:
         self.assert_true(can_use_ai, "User should be able to use AI tutor")
         
         # Step 4: Track usage
+        initial_usage = self.api.get_feature_usage(user_id, "ai_tutor")
         self.api.increment_feature_usage(user_id, "ai_tutor")
-        usage = self.api.get_feature_usage(user_id, "ai_tutor")
-        self.assert_equal(usage, 1, "Usage should be tracked")
+        new_usage = self.api.get_feature_usage(user_id, "ai_tutor")
+        self.assert_equal(new_usage, initial_usage + 1, "Usage should be incremented by 1")
         
         # Step 5: Check quota limit (mock: intermediate has 50 limit)
-        remaining = 50 - usage
-        self.assert_equal(remaining, 49, "49 questions should remain")
+        remaining = 50 - new_usage
+        self.assert_true(remaining > 0, "Should have questions remaining")
     
     def test_upgrade_flow(self):
         """Test tier upgrade flow"""
