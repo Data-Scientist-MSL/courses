@@ -1,0 +1,286 @@
+{
+  "theme": {
+    "primary_color": "#1E88E5",
+    "secondary_color": "#FFC107",
+    "success_color": "#4CAF50",
+    "warning_color": "#FF9800",
+    "error_color": "#F44336",
+    "info_color": "#2196F3",
+    "background_color": "#FFFFFF",
+    "secondary_background_color": "#F5F5F5",
+    "text_color": "#212121",
+    "secondary_text_color": "#757575",
+    "dark_mode_available": true,
+    "dark_mode": {
+      "background_color": "#263238",
+      "secondary_background_color": "#37474F",
+      "text_color": "#FFFFFF",
+      "secondary_text_color": "#B0BEC5"
+    }
+  },
+  "branding": {
+    "product_name": "GAI-Observe Academy",
+    "company_name": "GAI-Observe",
+    "logo_url": "/assets/logo.png",
+    "logo_dark_url": "/assets/logo_dark.png",
+    "favicon_url": "/assets/favicon.ico",
+    "support_email": "support@gai-observe.online",
+    "website_url": "https://gai-observe.online",
+    "social_links": {
+      "twitter": "https://twitter.com/gaiobserve",
+      "linkedin": "https://linkedin.com/company/gai-observe",
+      "github": "https://github.com/gai-observe"
+    }
+  },
+  "navigation": {
+    "sidebar_expanded_default": true,
+    "show_tier_badge": true,
+    "tier_badges": {
+      "basic": {
+        "emoji": "🔵",
+        "text": "Basic",
+        "color": "#90A4AE"
+      },
+      "intermediate": {
+        "emoji": "🟢",
+        "text": "Intermediate",
+        "color": "#66BB6A"
+      },
+      "advanced": {
+        "emoji": "⭐",
+        "text": "Advanced",
+        "color": "#FFD54F"
+      }
+    },
+    "pages": [
+      {
+        "id": "home",
+        "emoji": "🏠",
+        "title": "Home",
+        "path": "pages/00_🏠_Home.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "course_browser",
+        "emoji": "📚",
+        "title": "Course Browser",
+        "path": "pages/01_📚_Course_Browser.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "learn",
+        "emoji": "🎓",
+        "title": "Learn",
+        "path": "pages/02_🎓_Learn.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "labs",
+        "emoji": "🧪",
+        "title": "Labs",
+        "path": "pages/03_🧪_Labs.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "ai_tutor",
+        "emoji": "🤖",
+        "title": "AI Tutor",
+        "path": "pages/04_🤖_AI_Tutor.py",
+        "tiers": ["intermediate", "advanced"],
+        "hidden_for": ["basic"]
+      },
+      {
+        "id": "progress",
+        "emoji": "📊",
+        "title": "Progress",
+        "path": "pages/05_📊_Progress.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "achievements",
+        "emoji": "🏆",
+        "title": "Achievements",
+        "path": "pages/06_🏆_Achievements.py",
+        "tiers": ["intermediate", "advanced"],
+        "hidden_for": ["basic"]
+      },
+      {
+        "id": "certificates",
+        "emoji": "📜",
+        "title": "Certificates",
+        "path": "pages/07_📜_Certificates.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "datasets",
+        "emoji": "💾",
+        "title": "Datasets",
+        "path": "pages/08_💾_Datasets.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      },
+      {
+        "id": "settings",
+        "emoji": "⚙️",
+        "title": "Settings",
+        "path": "pages/09_⚙️_Settings.py",
+        "tiers": ["basic", "intermediate", "advanced"]
+      }
+    ]
+  },
+  "typography": {
+    "font_family": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "heading_1_size": "2.5rem",
+    "heading_2_size": "2rem",
+    "heading_3_size": "1.5rem",
+    "heading_4_size": "1.25rem",
+    "body_size": "1rem",
+    "caption_size": "0.875rem",
+    "small_size": "0.75rem",
+    "code_font_family": "'Fira Code', 'Courier New', monospace"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "xxl": "48px"
+  },
+  "components": {
+    "button": {
+      "border_radius": "8px",
+      "padding": "12px 24px",
+      "font_weight": "500",
+      "transition": "all 0.2s ease"
+    },
+    "card": {
+      "border_radius": "12px",
+      "shadow": "0 2px 8px rgba(0,0,0,0.1)",
+      "padding": "24px",
+      "hover_shadow": "0 4px 16px rgba(0,0,0,0.15)"
+    },
+    "input": {
+      "border_radius": "8px",
+      "border_width": "1px",
+      "padding": "10px 16px",
+      "focus_border_color": "#1E88E5"
+    },
+    "progress_bar": {
+      "height": "8px",
+      "border_radius": "4px",
+      "background_color": "#E0E0E0",
+      "fill_color": "#1E88E5"
+    }
+  },
+  "animations": {
+    "enabled": true,
+    "page_transition": "fade",
+    "loading_spinner": true,
+    "achievement_unlock": "confetti",
+    "button_hover": "scale"
+  },
+  "layout": {
+    "max_width": "1400px",
+    "sidebar_width": "280px",
+    "content_padding": "24px",
+    "grid_gap": "16px"
+  },
+  "video_player": {
+    "default_quality": "auto",
+    "controls_timeout_seconds": 3,
+    "seek_step_seconds": 10,
+    "volume_step": 0.1,
+    "show_thumbnails": true,
+    "show_chapter_markers": true
+  },
+  "notifications": {
+    "position": "top-right",
+    "duration_seconds": 5,
+    "max_visible": 3,
+    "show_icons": true,
+    "sound_enabled": false
+  },
+  "accessibility": {
+    "high_contrast_mode": false,
+    "reduce_motion": false,
+    "focus_visible": true,
+    "skip_to_content": true,
+    "aria_labels": true,
+    "keyboard_shortcuts_enabled": true
+  },
+  "performance": {
+    "lazy_load_images": true,
+    "lazy_load_videos": true,
+    "cache_api_responses": true,
+    "cache_ttl_seconds": 300,
+    "enable_service_worker": true
+  },
+  "feature_discovery": {
+    "show_upgrade_hints": true,
+    "show_new_feature_badges": true,
+    "onboarding_tutorial": {
+      "enabled": true,
+      "auto_start": true,
+      "steps": [
+        {
+          "target": "#home",
+          "title": "Welcome to CoursePlayerApp!",
+          "description": "Let's take a quick tour of the platform."
+        },
+        {
+          "target": "#course-browser",
+          "title": "Browse Courses",
+          "description": "Explore available courses and start learning."
+        },
+        {
+          "target": "#ai-tutor",
+          "title": "AI Tutor",
+          "description": "Get help from our AI tutor anytime. (Intermediate+)"
+        },
+        {
+          "target": "#progress",
+          "title": "Track Progress",
+          "description": "Monitor your learning progress and achievements."
+        }
+      ]
+    }
+  },
+  "upgrade_prompts": {
+    "show_inline_ctas": true,
+    "show_feature_comparison": true,
+    "trial_available": {
+      "ai_tutor": {
+        "enabled": true,
+        "duration_hours": 24,
+        "one_time_only": true
+      }
+    },
+    "cta_style": {
+      "button_color": "#FF9800",
+      "button_text": "🚀 Upgrade Now",
+      "emphasis": "high"
+    }
+  },
+  "localization": {
+    "default_language": "en",
+    "supported_languages": ["en", "es", "fr", "de", "zh"],
+    "date_format": "YYYY-MM-DD",
+    "time_format": "24h",
+    "currency": "USD"
+  },
+  "analytics": {
+    "enabled": true,
+    "track_page_views": true,
+    "track_button_clicks": true,
+    "track_video_plays": true,
+    "track_ai_questions": true,
+    "track_quiz_attempts": true,
+    "privacy_mode": "anonymized"
+  },
+  "experimental_features": {
+    "voice_input": false,
+    "ar_labs": false,
+    "collaborative_learning": false,
+    "live_classes": false
+  }
+}

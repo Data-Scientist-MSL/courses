@@ -1,0 +1,483 @@
+{
+  "features": {
+    "video_streaming": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "Stream video lessons",
+      "always_enabled": true,
+      "config": {
+        "adaptive_bitrate": true,
+        "hls_support": true
+      }
+    },
+    "video_download": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Download videos for offline viewing",
+      "upgrade_cta": "Upgrade to Intermediate to download videos and watch offline",
+      "config": {
+        "max_quality_by_tier": {
+          "intermediate": "720p",
+          "advanced": "1080p"
+        },
+        "max_concurrent_downloads": {
+          "intermediate": 3,
+          "advanced": 10
+        }
+      }
+    },
+    "video_quality_selection": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Manual video quality selection",
+      "config": {
+        "available_qualities": {
+          "basic": ["auto"],
+          "intermediate": ["auto", "480p", "720p"],
+          "advanced": ["auto", "480p", "720p", "1080p"]
+        }
+      }
+    },
+    "video_speed_control": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Playback speed control",
+      "config": {
+        "speed_options": {
+          "basic": [1.0],
+          "intermediate": [0.5, 0.75, 1.0, 1.25, 1.5, 2.0],
+          "advanced": [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0]
+        }
+      }
+    },
+    "video_transcripts": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "View video transcripts",
+      "config": {
+        "searchable": {
+          "intermediate": false,
+          "advanced": true
+        },
+        "downloadable": {
+          "intermediate": false,
+          "advanced": true
+        }
+      }
+    },
+    "video_annotations": {
+      "enabled_tiers": ["advanced"],
+      "description": "Create timestamped notes on videos",
+      "upgrade_cta": "Upgrade to Advanced to annotate videos with personal notes",
+      "config": {
+        "max_notes_per_video": 100,
+        "export_enabled": true
+      }
+    },
+    "video_picture_in_picture": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Picture-in-picture mode",
+      "config": {
+        "enabled": true
+      }
+    },
+    "ai_tutor": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "AI-powered tutoring assistance",
+      "upgrade_cta": "Upgrade to Intermediate to get AI tutoring with 50 questions/month",
+      "quota_config": {
+        "quota_name": "ai_tutor_quota",
+        "limits_by_tier": {
+          "intermediate": {
+            "questions_per_month": 50,
+            "reset_period": "monthly",
+            "reset_day": 1
+          },
+          "advanced": {
+            "questions_per_month": "unlimited",
+            "priority_queue": true
+          }
+        }
+      },
+      "config": {
+        "models_by_tier": {
+          "intermediate": "llama3.2:3b",
+          "advanced": "llama3.1:8b"
+        },
+        "context_window": {
+          "intermediate": 4096,
+          "advanced": 8192
+        },
+        "temperature": 0.7,
+        "max_response_tokens": {
+          "intermediate": 512,
+          "advanced": 1024
+        }
+      }
+    },
+    "ai_tutor_chat_history": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Save AI tutor conversation history",
+      "depends_on": ["ai_tutor"],
+      "config": {
+        "max_conversations": {
+          "intermediate": 10,
+          "advanced": "unlimited"
+        },
+        "persistent_storage": {
+          "intermediate": false,
+          "advanced": true
+        }
+      }
+    },
+    "ai_tutor_export": {
+      "enabled_tiers": ["advanced"],
+      "description": "Export AI tutor conversations",
+      "depends_on": ["ai_tutor"],
+      "config": {
+        "formats": ["markdown", "pdf", "html"]
+      }
+    },
+    "ai_tutor_code_execution": {
+      "enabled_tiers": ["advanced"],
+      "description": "Execute code snippets from AI tutor",
+      "depends_on": ["ai_tutor"],
+      "config": {
+        "sandbox_enabled": true,
+        "timeout_seconds": 30
+      }
+    },
+    "lab_viewing": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "View lab notebooks",
+      "always_enabled": true,
+      "config": {
+        "view_mode": {
+          "basic": "static_html",
+          "intermediate": "interactive",
+          "advanced": "interactive"
+        }
+      }
+    },
+    "lab_execution": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Execute code in interactive notebooks",
+      "upgrade_cta": "Upgrade to Intermediate to run code interactively",
+      "config": {
+        "execution_mode": {
+          "intermediate": "jupyterlite",
+          "advanced": "jupyterlab"
+        },
+        "resource_limits": {
+          "intermediate": {
+            "memory_mb": 512,
+            "timeout_seconds": 60,
+            "cpu_cores": 1
+          },
+          "advanced": {
+            "memory_mb": 2048,
+            "timeout_seconds": 300,
+            "cpu_cores": 2,
+            "gpu_enabled": true
+          }
+        }
+      }
+    },
+    "lab_save": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Save notebook progress",
+      "depends_on": ["lab_execution"],
+      "config": {
+        "storage_type": {
+          "intermediate": "browser_local",
+          "advanced": "server_persistent"
+        },
+        "auto_save_interval_seconds": 60
+      }
+    },
+    "lab_export": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Export notebooks",
+      "depends_on": ["lab_execution"],
+      "config": {
+        "formats": {
+          "intermediate": ["html"],
+          "advanced": ["ipynb", "html", "pdf"]
+        }
+      }
+    },
+    "lab_package_install": {
+      "enabled_tiers": ["advanced"],
+      "description": "Install Python packages in notebooks",
+      "depends_on": ["lab_execution"],
+      "config": {
+        "allowed_packages": "all",
+        "restricted_packages": ["os", "sys", "subprocess"]
+      }
+    },
+    "quiz_basic": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "Take quizzes",
+      "always_enabled": true,
+      "config": {
+        "question_types": ["multiple_choice", "true_false"]
+      }
+    },
+    "quiz_code_challenges": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Code challenge quizzes",
+      "config": {
+        "execution_enabled": {
+          "basic": false,
+          "intermediate": true,
+          "advanced": true
+        }
+      }
+    },
+    "quiz_adaptive": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Adaptive quiz difficulty",
+      "config": {
+        "difficulty_adjustment": true,
+        "personalized_questions": true
+      }
+    },
+    "quiz_retry": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "Retry quiz attempts",
+      "config": {
+        "max_attempts": {
+          "basic": 3,
+          "intermediate": 5,
+          "advanced": "unlimited"
+        }
+      }
+    },
+    "quiz_analytics": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Detailed quiz analytics",
+      "config": {
+        "analytics_level": {
+          "basic": "simple",
+          "intermediate": "detailed",
+          "advanced": "predictive"
+        }
+      }
+    },
+    "progress_tracking": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "Track course progress",
+      "always_enabled": true,
+      "config": {
+        "track_completion": true,
+        "track_time_spent": true
+      }
+    },
+    "progress_gamification": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "XP, levels, and streaks",
+      "upgrade_cta": "Upgrade to Intermediate for gamification features",
+      "config": {
+        "xp_enabled": true,
+        "levels_enabled": true,
+        "streaks_enabled": true,
+        "xp_per_lesson": 50,
+        "xp_per_quiz": 100,
+        "xp_per_lab": 150,
+        "xp_per_day_streak": 25
+      }
+    },
+    "progress_analytics": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Learning analytics dashboard",
+      "config": {
+        "analytics_type": {
+          "basic": "none",
+          "intermediate": "standard",
+          "advanced": "predictive"
+        },
+        "weak_topic_detection": {
+          "intermediate": true,
+          "advanced": true
+        },
+        "completion_prediction": {
+          "intermediate": false,
+          "advanced": true
+        }
+      }
+    },
+    "achievements": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Unlock achievements and badges",
+      "config": {
+        "total_achievements": 30,
+        "rare_achievements": {
+          "intermediate": 0,
+          "advanced": 5
+        }
+      }
+    },
+    "leaderboard": {
+      "enabled_tiers": ["advanced"],
+      "description": "Team/Enterprise leaderboard",
+      "config": {
+        "team_required": true,
+        "update_frequency": "hourly"
+      }
+    },
+    "certificate_generation": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Generate completion certificates",
+      "upgrade_cta": "Upgrade to Intermediate to earn verifiable certificates",
+      "config": {
+        "certificate_type": {
+          "intermediate": "verifiable",
+          "advanced": "professionally_signed"
+        },
+        "verification_method": {
+          "intermediate": "qr_code",
+          "advanced": "qr_code_and_digital_signature"
+        },
+        "formats": {
+          "intermediate": ["pdf"],
+          "advanced": ["pdf", "png"]
+        }
+      }
+    },
+    "certificate_linkedin": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Share certificates on LinkedIn",
+      "depends_on": ["certificate_generation"],
+      "config": {
+        "auto_fill_enabled": true
+      }
+    },
+    "certificate_custom_branding": {
+      "enabled_tiers": ["advanced"],
+      "description": "Custom certificate branding",
+      "depends_on": ["certificate_generation"],
+      "config": {
+        "custom_logo": true,
+        "custom_signature": true
+      }
+    },
+    "dataset_browsing": {
+      "enabled_tiers": ["basic", "intermediate", "advanced"],
+      "description": "Browse dataset catalog",
+      "config": {
+        "view_metadata": true
+      }
+    },
+    "dataset_preview": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Preview dataset content",
+      "upgrade_cta": "Upgrade to Intermediate to preview and download datasets",
+      "config": {
+        "preview_rows": {
+          "basic": 0,
+          "intermediate": 100,
+          "advanced": "unlimited"
+        }
+      }
+    },
+    "dataset_download": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Download datasets",
+      "depends_on": ["dataset_preview"],
+      "config": {
+        "max_concurrent_downloads": {
+          "intermediate": 2,
+          "advanced": 5
+        }
+      }
+    },
+    "dataset_upload": {
+      "enabled_tiers": ["advanced"],
+      "description": "Upload custom datasets",
+      "config": {
+        "max_file_size_mb": 500,
+        "allowed_formats": ["csv", "parquet", "xlsx", "json"]
+      }
+    },
+    "code_review_submission": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Submit projects for review",
+      "upgrade_cta": "Upgrade to Intermediate to submit projects for code review",
+      "quota_config": {
+        "quota_name": "code_review_quota",
+        "limits_by_tier": {
+          "intermediate": {
+            "submissions_per_course": 3,
+            "review_type": "automated"
+          },
+          "advanced": {
+            "submissions_per_course": 5,
+            "review_type": "automated_and_manual",
+            "sla_hours": 48
+          }
+        }
+      }
+    },
+    "code_review_automated": {
+      "enabled_tiers": ["intermediate", "advanced"],
+      "description": "Automated code review",
+      "depends_on": ["code_review_submission"],
+      "config": {
+        "linting_enabled": true,
+        "security_scan": true,
+        "style_check": true
+      }
+    },
+    "code_review_manual": {
+      "enabled_tiers": ["advanced"],
+      "description": "Manual expert code review",
+      "depends_on": ["code_review_submission"],
+      "config": {
+        "human_reviewer": true,
+        "detailed_feedback": true
+      }
+    },
+    "offline_mode": {
+      "enabled_tiers": ["advanced"],
+      "description": "Download content for offline access",
+      "upgrade_cta": "Upgrade to Advanced for full offline mode",
+      "config": {
+        "max_offline_days": 30,
+        "content_encryption": true,
+        "license_verification": "signature_based",
+        "sync_on_reconnect": true
+      }
+    },
+    "custom_branding": {
+      "enabled_tiers": ["advanced"],
+      "description": "Custom app branding",
+      "config": {
+        "custom_logo": true,
+        "custom_colors": true,
+        "white_label": false
+      }
+    },
+    "api_access": {
+      "enabled_tiers": ["advanced"],
+      "description": "API access for integrations",
+      "config": {
+        "rate_limit_per_hour": 1000,
+        "webhook_support": true
+      }
+    }
+  },
+  "tier_hierarchy": {
+    "basic": 0,
+    "intermediate": 1,
+    "advanced": 2
+  },
+  "quota_reset_schedules": {
+    "ai_tutor_quota": "monthly",
+    "code_review_quota": "per_course"
+  },
+  "grace_periods": {
+    "expired_license": {
+      "days": 7,
+      "features_available": ["video_streaming", "progress_tracking"]
+    },
+    "quota_exceeded": {
+      "soft_limit_percentage": 90,
+      "warning_enabled": true
+    }
+  }
+}
