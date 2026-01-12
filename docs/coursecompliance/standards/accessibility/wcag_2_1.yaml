@@ -1,0 +1,80 @@
+# Example Accessibility Standards - WCAG 2.1 AA
+
+standard:
+  id: "A11Y-WCAG-2.1"
+  name: "WCAG 2.1 AA Compliance Standard"
+  version: "1.0.0"
+  category: "accessibility"
+  subcategory: "wcag"
+  description: "Web Content Accessibility Guidelines 2.1 Level AA requirements"
+  last_updated: "2026-01-12"
+
+profiles:
+  strict:
+    enabled: true
+    pass_threshold: 1.0  # 100% compliance
+    blocking_on_failure: true
+  standard:
+    enabled: true
+    pass_threshold: 0.85  # 85% compliance
+    blocking_on_failure: true
+  relaxed:
+    enabled: true
+    pass_threshold: 0.50  # 50% basic compliance
+    blocking_on_failure: false
+
+requirements:
+  - id: "WCAG-1.1.1"
+    name: "Non-text Content (Level A)"
+    description: "All non-text content has a text alternative"
+    severity: "critical"
+    blocking: true
+    auto_fixable: true
+    check_type: "automated"
+    
+    validation:
+      method: "check_alt_text"
+      parameters:
+        elements: ["img", "area", "input[type='image']"]
+    
+    pass_criteria:
+      - "All images have alt attributes"
+      - "Alt text is descriptive"
+      - "Decorative images have alt=''"
+    
+    remediation:
+      auto_fix: true
+      suggestion: "Add descriptive alt text using AI vision model"
+      documentation_url: "https://www.w3.org/WAI/WCAG21/Understanding/non-text-content"
+
+  - id: "WCAG-1.4.3"
+    name: "Contrast (Minimum) (Level AA)"
+    description: "Text has a contrast ratio of at least 4.5:1"
+    severity: "critical"
+    blocking: true
+    auto_fixable: true
+    check_type: "automated"
+    
+    validation:
+      method: "check_color_contrast"
+      parameters:
+        min_ratio_normal: 4.5
+        min_ratio_large: 3.0
+    
+    pass_criteria:
+      - "Normal text: 4.5:1 contrast ratio"
+      - "Large text: 3:1 contrast ratio"
+    
+    remediation:
+      auto_fix: true
+      suggestion: "Adjust text or background color to meet contrast requirement"
+      documentation_url: "https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum"
+
+related_standards:
+  - "A11Y-ALT-TEXT"
+  - "A11Y-COLOR"
+
+changelog:
+  - version: "1.0.0"
+    date: "2026-01-12"
+    changes: "Initial WCAG 2.1 AA standard definition"
