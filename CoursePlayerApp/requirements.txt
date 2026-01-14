@@ -1,0 +1,51 @@
+# CoursePlayerApp Requirements
+# Python 3.10+
+
+# Web Framework
+streamlit==1.30.0
+streamlit-extras==0.3.6
+streamlit-option-menu==0.3.6
+
+# API & Networking
+requests==2.31.0
+urllib3==2.6.3
+
+# Authentication & Security
+PyJWT==2.8.0
+cryptography==42.0.4
+
+# AI & Machine Learning
+ollama==0.1.6
+
+# Data Visualization
+plotly==5.18.0
+matplotlib==3.8.2
+
+# Document Processing
+python-pptx==0.6.23
+reportlab==4.0.7
+fpdf2==2.7.6
+Pillow==10.3.0
+
+# Cloud Storage (Optional - choose one)
+boto3==1.34.10  # AWS S3
+# cloudflare==2.11.7  # Cloudflare R2
+
+# Database
+psycopg2-binary==2.9.9  # PostgreSQL
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Progress & Loading
+tqdm==4.66.1
+
+# Configuration
+python-dotenv==1.0.0
+
+# Logging
+loguru==0.7.2
+
+# Type Hints
+typing-extensions==4.9.0

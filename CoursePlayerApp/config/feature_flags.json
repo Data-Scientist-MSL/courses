@@ -1,0 +1,126 @@
+{
+  "basic": {
+    "tier_name": "Basic",
+    "tier_price": 97,
+    "tier_description": "Perfect for students exploring data science",
+    
+    "video_download": false,
+    "video_quality": "480p",
+    "video_quality_options": ["480p"],
+    
+    "slides_export": false,
+    "slides_format": [],
+    
+    "labs_interactive": false,
+    "labs_priority": false,
+    
+    "ai_tutor_enabled": false,
+    "ai_tutor_quota": 0,
+    "ai_tutor_priority": false,
+    "ai_tutor_history": false,
+    
+    "course_access": [
+      "ai-01",
+      "ai-02",
+      "ds-01",
+      "ds-02",
+      "ml-01"
+    ],
+    
+    "analytics_level": "basic",
+    "analytics_heatmap": false,
+    "analytics_export": false,
+    "analytics_peer_benchmark": false,
+    
+    "blockchain_certificates": false,
+    
+    "support_level": "community",
+    "support_response_time": null,
+    "support_live_chat": false
+  },
+  
+  "intermediate": {
+    "tier_name": "Intermediate",
+    "tier_price": 247,
+    "tier_description": "For learners committing to skill-building",
+    
+    "video_download": true,
+    "video_quality": "720p",
+    "video_quality_options": ["480p", "720p"],
+    "video_download_expiry_days": 30,
+    
+    "slides_export": true,
+    "slides_format": ["pdf"],
+    
+    "labs_interactive": true,
+    "labs_priority": false,
+    "labs_extended_sessions": false,
+    
+    "ai_tutor_enabled": true,
+    "ai_tutor_quota": 50,
+    "ai_tutor_priority": false,
+    "ai_tutor_history": false,
+    
+    "course_access": [
+      "ai-01",
+      "ai-02",
+      "ai-03",
+      "ds-01",
+      "ds-02",
+      "ds-03",
+      "ml-01",
+      "ml-02"
+    ],
+    
+    "analytics_level": "advanced",
+    "analytics_heatmap": false,
+    "analytics_export": false,
+    "analytics_peer_benchmark": false,
+    
+    "blockchain_certificates": false,
+    
+    "support_level": "email",
+    "support_response_time": 48,
+    "support_live_chat": false
+  },
+  
+  "advanced": {
+    "tier_name": "Advanced",
+    "tier_price": 497,
+    "tier_description": "Premium experience for professionals",
+    
+    "video_download": true,
+    "video_quality": "1080p",
+    "video_quality_options": ["480p", "720p", "1080p"],
+    "video_download_expiry_days": -1,
+    "video_formats": ["mp4", "webm"],
+    
+    "slides_export": true,
+    "slides_format": ["pdf", "pptx"],
+    "slides_high_res": true,
+    
+    "labs_interactive": true,
+    "labs_priority": true,
+    "labs_extended_sessions": true,
+    
+    "ai_tutor_enabled": true,
+    "ai_tutor_quota": -1,
+    "ai_tutor_priority": true,
+    "ai_tutor_history": true,
+    
+    "course_access": "all",
+    
+    "analytics_level": "detailed",
+    "analytics_heatmap": true,
+    "analytics_export": true,
+    "analytics_peer_benchmark": true,
+    
+    "blockchain_certificates": true,
+    "certificate_blockchain": "polygon",
+    
+    "support_level": "priority",
+    "support_response_time": 24,
+    "support_live_chat": true,
+    "mentorship_sessions": 4
+  }
+}
